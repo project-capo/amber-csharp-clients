@@ -21,10 +21,9 @@ namespace Amber_API.amber
         private IPEndPoint sendEndPoint;
         private IPEndPoint receiveEndPoint;
 
-        private readonly int buffSize = 512;
-        private static readonly int RECEIVING_TIMEOUT = 1000;
+        private readonly int buffSize = 4096;
 
-        private Dictionary<Tuple<int, int>, AmberProxy> proxyDictionary;
+        private Dictionary<Tuple<int, int>, AmberProxy> proxyDictionary = new Dictionary<Tuple<int, int>, AmberProxy>();
         private Thread receivingThread;
 
         public void RegisterClient(int deviceType, int deviceID, AmberProxy proxy)
@@ -76,6 +75,7 @@ namespace Amber_API.amber
                     if (!header.HasDeviceType || !header.HasDeviceID || header.DeviceID == 0)
                     {
                         message = DriverMsg.ParseFrom(messageByteString);
+                        HandleMessageFromMediator(header, message);
                     }
                     else
                     {
@@ -87,33 +87,7 @@ namespace Amber_API.amber
                             continue;
                         }
                         message = DriverMsg.ParseFrom(messageByteString, clientProxy.GetExtensionRegistry());
-                    }
-
-                    proxyDictionary.TryGetValue(new Tuple<int, int>(header.DeviceType, header.DeviceID), out clientProxy);
-                    if (clientProxy == null)
-                    {
-                        Debug.WriteLine("Client proxy with given device type {0} and ID {1} not found. Ignoring message.", header.DeviceType, header.DeviceID);
-                        continue;
-                    }
-
-                    message = DriverMsg.ParseFrom(messageByteString, clientProxy.GetExtensionRegistry());
-
-                    switch (message.Type)
-                    {
-                        case DriverMsg.Types.MsgType.DATA:
-                            clientProxy.HandleDataMsg(header, message);
-                            break;
-                        case DriverMsg.Types.MsgType.PING:
-                            clientProxy.HandlePingMsg(header, message);
-                            break;
-                        case DriverMsg.Types.MsgType.PONG:
-                            clientProxy.HandlePongMsg(header, message);
-                            break;
-                        case DriverMsg.Types.MsgType.DRIVER_DIED:
-                            clientProxy.HandleDriverDiedMsg(header, message);
-                            break;
-                        default:
-                            continue;
+                        HandleMessageFromDriver(header, message, clientProxy);
                     }
                 }
                 catch (InvalidProtocolBufferException ex)
@@ -125,6 +99,64 @@ namespace Amber_API.amber
                     Debug.WriteLine("IOException while receiving packet");
                 }
             }
+        }
+
+        private void HandleMessageFromDriver(DriverHdr header, DriverMsg message, AmberProxy clientProxy)
+        {
+            switch (message.Type)
+            {
+                case DriverMsg.Types.MsgType.DATA:
+                    Debug.WriteLine("DATA message came for {0}:{1}, handling.", clientProxy.DeviceType, clientProxy.DeviceId);
+                    clientProxy.HandleDataMsg(header, message);
+                    break;
+                case DriverMsg.Types.MsgType.PING:
+                    Debug.WriteLine("PING message came for {0}:{1}, handling.", clientProxy.DeviceType, clientProxy.DeviceId);
+                    clientProxy.HandlePingMsg(header, message);
+                    break;
+                case DriverMsg.Types.MsgType.PONG:
+                    Debug.WriteLine("PONG message came for {0}:{1}, handling.", clientProxy.DeviceType, clientProxy.DeviceId);
+                    clientProxy.HandlePongMsg(header, message);
+                    break;
+                case DriverMsg.Types.MsgType.DRIVER_DIED:
+                    Debug.WriteLine("DRIVER_DIED message came for {0}:{1}, handling.", clientProxy.DeviceType, clientProxy.DeviceId);
+                    clientProxy.HandleDriverDiedMsg(header, message);
+                    break;
+                default:
+                    Debug.WriteLine("Unexpected message came {0} for {1}:{2}, ignoring", message.Type, clientProxy.DeviceType, clientProxy.DeviceId);
+                    break;
+            }
+        }
+
+        private void HandleMessageFromMediator(DriverHdr header, DriverMsg message)
+        {
+            switch (message.Type)
+            {
+                case DriverMsg.Types.MsgType.DATA:
+                    Debug.WriteLine("DATA message came, but device details not set, ignoring.");
+                    break;
+                case DriverMsg.Types.MsgType.PING:
+                    Debug.WriteLine("PING message came, handling.");
+                    HandlePingMsg(header, message);
+                    break;
+                case DriverMsg.Types.MsgType.PONG:
+                    Debug.WriteLine("PONG message came, handling.");
+                    HandlePongMsg(header, message);
+                    break;
+                case DriverMsg.Types.MsgType.DRIVER_DIED:
+                    Debug.WriteLine("DATA message came, but device details not set, ignoring.");
+                    break;
+                default:
+                    Debug.WriteLine("Unexpected message came {0}, ignoring", message.Type);
+                    break;
+            }
+        }
+
+        private void HandlePongMsg(DriverHdr header, DriverMsg message)
+        {
+        }
+
+        private void HandlePingMsg(DriverHdr header, DriverMsg message)
+        {
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
