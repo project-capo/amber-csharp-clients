@@ -10,17 +10,17 @@ namespace Amber_API.amber
 {
     public abstract class AmberProxy
     {
-        protected readonly AmberClient amberClient;
-        protected readonly int deviceType;
-        protected readonly int deviceID;
+        public AmberClient AmberClient { get; private set; }
+        public int DeviceType { get; private set; }
+        public int DeviceId { get; private set; }
 
-        public AmberProxy(int deviceType, int deviceID, AmberClient amberClient)
-        {
-            this.deviceType = deviceType;
-            this.deviceID = deviceID;
-            this.amberClient = amberClient;
+        public AmberProxy(int deviceType, int deviceId, AmberClient amberClient)
+        {            
+            DeviceId = deviceId;
+            DeviceType = deviceType;
+            AmberClient = amberClient;
 
-            amberClient.RegisterClient(deviceType, deviceID, this);
+            amberClient.RegisterClient(deviceType, deviceId, this);
         }
 
         public abstract void HandleDataMsg(DriverHdr header, DriverMsg message);
@@ -42,8 +42,8 @@ namespace Amber_API.amber
         protected DriverHdr BuildHeader()
         {
             DriverHdr.Builder driverHdrBuilder = DriverHdr.CreateBuilder();
-            driverHdrBuilder.SetDeviceType(deviceType);
-            driverHdrBuilder.SetDeviceID(deviceID);
+            driverHdrBuilder.SetDeviceType(DeviceType);
+            driverHdrBuilder.SetDeviceID(DeviceId);
 
             return driverHdrBuilder.Build();
         }

@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="amber\AmberClient.cs" />
     <Compile Include="amber\AmberConnectionException.cs" />
+    <Compile Include="amber\FutureObject.cs" />
     <Compile Include="amber\IAmberListener.cs" />
     <Compile Include="amber\AmberProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
