@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Amber_API.amber
+namespace Amber_API.Amber
 {
     public interface IAmberListener<T>
     {
