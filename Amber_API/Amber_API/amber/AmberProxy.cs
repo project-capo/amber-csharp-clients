@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using amber;
 using Google.ProtocolBuffers;
 
-namespace Amber_API.amber
+namespace Amber_API.Amber
 {
     public abstract class AmberProxy
     {
+        protected AmberProxy(){}
+
         public AmberClient AmberClient { get; private set; }
         public int DeviceType { get; private set; }
         public int DeviceId { get; private set; }
@@ -20,7 +24,7 @@ namespace Amber_API.amber
             DeviceType = deviceType;
             AmberClient = amberClient;
 
-            amberClient.RegisterClient(deviceType, deviceId, this);
+            amberClient.RegisterClient(this);
         }
 
         public abstract void HandleDataMsg(DriverHdr header, DriverMsg message);
@@ -48,5 +52,20 @@ namespace Amber_API.amber
             return driverHdrBuilder.Build();
         }
 
+        public void TerminateProxy()
+        {
+            DriverMsg.Builder driverMsgBuilder = DriverMsg.CreateBuilder();
+            driverMsgBuilder.SetType(DriverMsg.Types.MsgType.CLIENT_DIED);
+
+            try
+            {
+                AmberClient.SendMessage(BuildHeader(), driverMsgBuilder.Build());
+            }
+
+            catch (IOException e)
+            {
+                Debug.WriteLine("Error in sending terminate message");
+            }
+        }
     }
 }
