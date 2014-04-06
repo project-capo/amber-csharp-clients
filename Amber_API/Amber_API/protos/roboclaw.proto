@@ -1,0 +1,24 @@
+package amber;
+
+import "google/protobuf/csharp_options.proto";
+
+option (google.protobuf.csharp_file_options).namespace = "Amber.Protos";
+option (google.protobuf.csharp_file_options).umbrella_classname = "Roboclaw";
+
+import "drivermsg.proto";
+
+extend amber.DriverMsg {
+
+	optional MotorsSpeed motorsCommand = 10;
+	optional bool currentSpeedRequest = 11;
+	optional MotorsSpeed currentSpeed = 12;
+}
+
+message MotorsSpeed {
+
+	optional int32 frontLeftSpeed = 1;
+	optional int32 frontRightSpeed = 2;
+	optional int32 rearLeftSpeed = 3;
+	optional int32 rearRightSpeed = 4;
+
+}

@@ -10,7 +10,7 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
-using amber;
+using Amber.Protos;
 using Google.ProtocolBuffers;
 
 namespace Amber_API.Amber
@@ -23,9 +23,6 @@ namespace Amber_API.Amber
         }
 
         private ConnectionHandler ConnectionHandler { get; set; }
-
-        private IPEndPoint sendEndPoint;
-        private IPEndPoint receiveEndPoint;
 
         private readonly int buffSize = 4096;
         private bool isActive;
@@ -157,6 +154,7 @@ namespace Amber_API.Amber
         public void Send(byte [] array)
         {
             ConnectionHandler.Send(array);
+            //Roboclaw.Motor
         }
 
        
