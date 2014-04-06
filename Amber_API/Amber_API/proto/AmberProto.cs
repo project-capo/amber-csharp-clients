@@ -6,10 +6,10 @@ using pb = global::Google.ProtocolBuffers;
 using pbc = global::Google.ProtocolBuffers.Collections;
 using pbd = global::Google.ProtocolBuffers.Descriptors;
 using scg = global::System.Collections.Generic;
-namespace amber {
+namespace Amber.Protos {
   
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  public static partial class Drivermsg {
+  public static partial class AmberProto {
   
     #region Extension registration
     public static void RegisterAllExtensions(pb::ExtensionRegistry registry) {
@@ -17,9 +17,9 @@ namespace amber {
     #endregion
     #region Static variables
     internal static pbd::MessageDescriptor internal__static_amber_DriverHdr__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::amber.DriverHdr, global::amber.DriverHdr.Builder> internal__static_amber_DriverHdr__FieldAccessorTable;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Amber.Protos.DriverHdr, global::Amber.Protos.DriverHdr.Builder> internal__static_amber_DriverHdr__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_amber_DriverMsg__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::amber.DriverMsg, global::amber.DriverMsg.Builder> internal__static_amber_DriverMsg__FieldAccessorTable;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Amber.Protos.DriverMsg, global::Amber.Protos.DriverMsg.Builder> internal__static_amber_DriverMsg__FieldAccessorTable;
     #endregion
     #region Descriptor
     public static pbd::FileDescriptor Descriptor {
@@ -27,32 +27,36 @@ namespace amber {
     }
     private static pbd::FileDescriptor descriptor;
     
-    static Drivermsg() {
+    static AmberProto() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
-          "Cg9kcml2ZXJtc2cucHJvdG8SBWFtYmVyIkgKCURyaXZlckhkchISCgpkZXZp" + 
-          "Y2VUeXBlGAEgASgFEhAKCGRldmljZUlEGAIgASgFEhUKCWNsaWVudElEcxgD" + 
-          "IAMoBUICEAEi+AEKCURyaXZlck1zZxImCgR0eXBlGAIgAigOMhguYW1iZXIu" + 
-          "RHJpdmVyTXNnLk1zZ1R5cGUSDgoGc3luTnVtGAMgASgNEg4KBmFja051bRgE" + 
-          "IAEoDRITCgtsaXN0ZW5lck51bRgFIAEoDSKHAQoHTXNnVHlwZRIICgREQVRB" + 
-          "EAESCAoEUElORxACEggKBFBPTkcQAxIPCgtDTElFTlRfRElFRBAEEg8KC0RS" + 
-          "SVZFUl9ESUVEEAUSCQoFSEVMTE8QBhIMCghIRUxPX0FDSxAHEg0KCUhFTExP" + 
-          "X1JTVBAIEhQKEERSSVZFUl9OT1RfRk9VTkQQCSoECAgQQCo2CgpEZXZpY2VU" + 
-          "eXBlEgsKB05JTkVET0YQARIMCghST0JPQ0xBVxACEg0KCVNUQVJHQVpFUhAD" + 
-          "QhsKC2FtYmVyLnByb3RvQgpBbWJlclByb3RvSAE=");
+          "Cg9kcml2ZXJtc2cucHJvdG8SBWFtYmVyGiRnb29nbGUvcHJvdG9idWYvY3No" + 
+          "YXJwX29wdGlvbnMucHJvdG8iSAoJRHJpdmVySGRyEhIKCmRldmljZVR5cGUY" + 
+          "ASABKAUSEAoIZGV2aWNlSUQYAiABKAUSFQoJY2xpZW50SURzGAMgAygFQgIQ" + 
+          "ASK5AQoJRHJpdmVyTXNnEiYKBHR5cGUYAiACKA4yGC5hbWJlci5Ecml2ZXJN" + 
+          "c2cuTXNnVHlwZRIOCgZzeW5OdW0YAyABKA0SDgoGYWNrTnVtGAQgASgNEhMK" + 
+          "C2xpc3RlbmVyTnVtGAUgASgNIkkKB01zZ1R5cGUSCAoEREFUQRABEggKBFBJ" + 
+          "TkcQAhIICgRQT05HEAMSDwoLQ0xJRU5UX0RJRUQQBBIPCgtEUklWRVJfRElF" + 
+          "RBAFKgQICBBAKjYKCkRldmljZVR5cGUSCwoHTklORURPRhABEgwKCFJPQk9D" + 
+          "TEFXEAISDQoJU1RBUkdBWkVSEANCH0gBwj4aCgxBbWJlci5Qcm90b3MSCkFt" + 
+          "YmVyUHJvdG8=");
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_amber_DriverHdr__Descriptor = Descriptor.MessageTypes[0];
         internal__static_amber_DriverHdr__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::amber.DriverHdr, global::amber.DriverHdr.Builder>(internal__static_amber_DriverHdr__Descriptor,
+            new pb::FieldAccess.FieldAccessorTable<global::Amber.Protos.DriverHdr, global::Amber.Protos.DriverHdr.Builder>(internal__static_amber_DriverHdr__Descriptor,
                 new string[] { "DeviceType", "DeviceID", "ClientIDs", });
         internal__static_amber_DriverMsg__Descriptor = Descriptor.MessageTypes[1];
         internal__static_amber_DriverMsg__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::amber.DriverMsg, global::amber.DriverMsg.Builder>(internal__static_amber_DriverMsg__Descriptor,
+            new pb::FieldAccess.FieldAccessorTable<global::Amber.Protos.DriverMsg, global::Amber.Protos.DriverMsg.Builder>(internal__static_amber_DriverMsg__Descriptor,
                 new string[] { "Type", "SynNum", "AckNum", "ListenerNum", });
-        return null;
+        pb::ExtensionRegistry registry = pb::ExtensionRegistry.CreateInstance();
+        RegisterAllExtensions(registry);
+        global::Google.ProtocolBuffers.DescriptorProtos.CSharpOptions.RegisterAllExtensions(registry);
+        return registry;
       };
       pbd::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
           new pbd::FileDescriptor[] {
+          global::Google.ProtocolBuffers.DescriptorProtos.CSharpOptions.Descriptor, 
           }, assigner);
     }
     #endregion
@@ -87,11 +91,11 @@ namespace amber {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::amber.Drivermsg.internal__static_amber_DriverHdr__Descriptor; }
+      get { return global::Amber.Protos.AmberProto.internal__static_amber_DriverHdr__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<DriverHdr, DriverHdr.Builder> InternalFieldAccessors {
-      get { return global::amber.Drivermsg.internal__static_amber_DriverHdr__FieldAccessorTable; }
+      get { return global::Amber.Protos.AmberProto.internal__static_amber_DriverHdr__FieldAccessorTable; }
     }
     
     public const int DeviceTypeFieldNumber = 1;
@@ -270,11 +274,11 @@ namespace amber {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::amber.DriverHdr.Descriptor; }
+        get { return global::Amber.Protos.DriverHdr.Descriptor; }
       }
       
       public override DriverHdr DefaultInstanceForType {
-        get { return global::amber.DriverHdr.DefaultInstance; }
+        get { return global::Amber.Protos.DriverHdr.DefaultInstance; }
       }
       
       public override DriverHdr BuildPartial() {
@@ -295,7 +299,7 @@ namespace amber {
       }
       
       public override Builder MergeFrom(DriverHdr other) {
-        if (other == global::amber.DriverHdr.DefaultInstance) return this;
+        if (other == global::Amber.Protos.DriverHdr.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasDeviceType) {
           DeviceType = other.DeviceType;
@@ -443,7 +447,7 @@ namespace amber {
       }
     }
     static DriverHdr() {
-      object.ReferenceEquals(global::amber.Drivermsg.Descriptor, null);
+      object.ReferenceEquals(global::Amber.Protos.AmberProto.Descriptor, null);
     }
   }
   
@@ -466,11 +470,11 @@ namespace amber {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::amber.Drivermsg.internal__static_amber_DriverMsg__Descriptor; }
+      get { return global::Amber.Protos.AmberProto.internal__static_amber_DriverMsg__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<DriverMsg, DriverMsg.Builder> InternalFieldAccessors {
-      get { return global::amber.Drivermsg.internal__static_amber_DriverMsg__FieldAccessorTable; }
+      get { return global::Amber.Protos.AmberProto.internal__static_amber_DriverMsg__FieldAccessorTable; }
     }
     
     #region Nested types
@@ -482,10 +486,6 @@ namespace amber {
         PONG = 3,
         CLIENT_DIED = 4,
         DRIVER_DIED = 5,
-        HELLO = 6,
-        HELO_ACK = 7,
-        HELLO_RST = 8,
-        DRIVER_NOT_FOUND = 9,
       }
       
     }
@@ -493,11 +493,11 @@ namespace amber {
     
     public const int TypeFieldNumber = 2;
     private bool hasType;
-    private global::amber.DriverMsg.Types.MsgType type_ = global::amber.DriverMsg.Types.MsgType.DATA;
+    private global::Amber.Protos.DriverMsg.Types.MsgType type_ = global::Amber.Protos.DriverMsg.Types.MsgType.DATA;
     public bool HasType {
       get { return hasType; }
     }
-    public global::amber.DriverMsg.Types.MsgType Type {
+    public global::Amber.Protos.DriverMsg.Types.MsgType Type {
       get { return type_; }
     }
     
@@ -679,11 +679,11 @@ namespace amber {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::amber.DriverMsg.Descriptor; }
+        get { return global::Amber.Protos.DriverMsg.Descriptor; }
       }
       
       public override DriverMsg DefaultInstanceForType {
-        get { return global::amber.DriverMsg.DefaultInstance; }
+        get { return global::Amber.Protos.DriverMsg.DefaultInstance; }
       }
       
       public override DriverMsg BuildPartial() {
@@ -704,7 +704,7 @@ namespace amber {
       }
       
       public override Builder MergeFrom(DriverMsg other) {
-        if (other == global::amber.DriverMsg.DefaultInstance) return this;
+        if (other == global::Amber.Protos.DriverMsg.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasType) {
           Type = other.Type;
@@ -799,11 +799,11 @@ namespace amber {
       public bool HasType {
        get { return result.hasType; }
       }
-      public global::amber.DriverMsg.Types.MsgType Type {
+      public global::Amber.Protos.DriverMsg.Types.MsgType Type {
         get { return result.Type; }
         set { SetType(value); }
       }
-      public Builder SetType(global::amber.DriverMsg.Types.MsgType value) {
+      public Builder SetType(global::Amber.Protos.DriverMsg.Types.MsgType value) {
         PrepareBuilder();
         result.hasType = true;
         result.type_ = value;
@@ -812,7 +812,7 @@ namespace amber {
       public Builder ClearType() {
         PrepareBuilder();
         result.hasType = false;
-        result.type_ = global::amber.DriverMsg.Types.MsgType.DATA;
+        result.type_ = global::Amber.Protos.DriverMsg.Types.MsgType.DATA;
         return this;
       }
       
@@ -883,7 +883,7 @@ namespace amber {
       }
     }
     static DriverMsg() {
-      object.ReferenceEquals(global::amber.Drivermsg.Descriptor, null);
+      object.ReferenceEquals(global::Amber.Protos.AmberProto.Descriptor, null);
     }
   }
   

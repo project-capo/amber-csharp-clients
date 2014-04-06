@@ -3,29 +3,8 @@ using System.Threading;
 
 namespace Amber_API.Amber
 {
-    public class SpeedOutcome
+    public class SpeedOutcome : Outcome
     {
-        private bool _available;
-        protected bool Available
-        {
-            get
-            {
-                if (Exception != null)
-                {
-                    throw Exception;
-                }
-                return _available;
-            }
-            set
-            {
-                lock (this)
-                {
-                    _available = value;
-                    autoEvent.Set();
-                }       
-            }
-        }
-
         private int _frontLeftSpeed;
         public int FrontLeftSpeed
         {
@@ -72,20 +51,6 @@ namespace Amber_API.Amber
                 return _rearRightSpeed;
             }
             set { _rearRightSpeed = value;  }
-        }
-
-        public  Exception Exception { get; set; }
-        private AutoResetEvent autoEvent = new AutoResetEvent(false);
-
-        public void WaitAvailable()
-        {
-            lock (this)
-            {
-                while (Available)
-                {
-                    autoEvent.WaitOne();
-                }
-            }    
         }
     }
 }

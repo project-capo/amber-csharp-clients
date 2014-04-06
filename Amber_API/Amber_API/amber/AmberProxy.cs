@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using amber;
+using Amber.Protos;
 using Google.ProtocolBuffers;
 
 namespace Amber_API.Amber
@@ -25,6 +20,12 @@ namespace Amber_API.Amber
             AmberClient = amberClient;
 
             amberClient.RegisterClient(this);
+        }
+
+        private static uint _syncnumber;
+        public static uint NextSyncNumber
+        {
+            get { return ++_syncnumber; }
         }
 
         public abstract void HandleDataMsg(DriverHdr header, DriverMsg message);
