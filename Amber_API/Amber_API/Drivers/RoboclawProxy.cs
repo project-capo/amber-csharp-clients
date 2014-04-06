@@ -91,6 +91,7 @@ namespace Amber_API.Drivers
 
     public enum DeviceType
     {
+        Ninedof = 1,
         Roboclaw = 2,
         Stargazer = 3
     }
