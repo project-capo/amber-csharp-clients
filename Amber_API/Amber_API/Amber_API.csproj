@@ -64,8 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="protos\drivermsg.proto" />
     <None Include="protos\google\protobuf\csharp_options.proto" />
     <None Include="protos\google\protobuf\descriptor.proto" />
+    <None Include="protos\ninedof.proto" />
+    <None Include="protos\roboclaw.proto" />
     <None Include="protos\tutorial\addressbook.proto" />
   </ItemGroup>
   <ItemGroup>
