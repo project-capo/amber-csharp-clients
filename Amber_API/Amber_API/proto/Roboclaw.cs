@@ -6,39 +6,30 @@ using pb = global::Google.ProtocolBuffers;
 using pbc = global::Google.ProtocolBuffers.Collections;
 using pbd = global::Google.ProtocolBuffers.Descriptors;
 using scg = global::System.Collections.Generic;
-namespace amber.roboclaw_proto {
+namespace Amber.Protos {
   
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   public static partial class Roboclaw {
   
     #region Extension registration
     public static void RegisterAllExtensions(pb::ExtensionRegistry registry) {
-      registry.Add(global::amber.roboclaw_proto.Roboclaw.MotorsCommands);
-      registry.Add(global::amber.roboclaw_proto.Roboclaw.CurrentSpeedRequests);
-      registry.Add(global::amber.roboclaw_proto.Roboclaw.CurrentSpeeds);
-      registry.Add(global::amber.roboclaw_proto.Roboclaw.SetPidConstantsRequests);
+      registry.Add(global::Amber.Protos.Roboclaw.MotorsCommand);
+      registry.Add(global::Amber.Protos.Roboclaw.CurrentSpeedRequest);
+      registry.Add(global::Amber.Protos.Roboclaw.CurrentSpeed);
     }
     #endregion
     #region Extensions
-    public const int MotorsCommandsFieldNumber = 10;
-    public static pb::GeneratedExtensionBase<scg::IList<global::amber.roboclaw_proto.MotorsCommand>> MotorsCommands;
-    public const int CurrentSpeedRequestsFieldNumber = 11;
-    public static pb::GeneratedExtensionBase<scg::IList<global::amber.roboclaw_proto.CurrentSpeedRequest>> CurrentSpeedRequests;
-    public const int CurrentSpeedsFieldNumber = 12;
-    public static pb::GeneratedExtensionBase<scg::IList<global::amber.roboclaw_proto.CurrentSpeed>> CurrentSpeeds;
-    public const int SetPidConstantsRequestsFieldNumber = 13;
-    public static pb::GeneratedExtensionBase<scg::IList<global::amber.roboclaw_proto.SetPidConstantsRequest>> SetPidConstantsRequests;
+    public const int MotorsCommandFieldNumber = 10;
+    public static pb::GeneratedExtensionBase<global::Amber.Protos.MotorsSpeed> MotorsCommand;
+    public const int CurrentSpeedRequestFieldNumber = 11;
+    public static pb::GeneratedExtensionBase<bool> CurrentSpeedRequest;
+    public const int CurrentSpeedFieldNumber = 12;
+    public static pb::GeneratedExtensionBase<global::Amber.Protos.MotorsSpeed> CurrentSpeed;
     #endregion
     
     #region Static variables
-    internal static pbd::MessageDescriptor internal__static_amber_roboclaw_proto_MotorsCommand__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::amber.roboclaw_proto.MotorsCommand, global::amber.roboclaw_proto.MotorsCommand.Builder> internal__static_amber_roboclaw_proto_MotorsCommand__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_amber_roboclaw_proto_SetPidConstantsRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::amber.roboclaw_proto.SetPidConstantsRequest, global::amber.roboclaw_proto.SetPidConstantsRequest.Builder> internal__static_amber_roboclaw_proto_SetPidConstantsRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_amber_roboclaw_proto_CurrentSpeedRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::amber.roboclaw_proto.CurrentSpeedRequest, global::amber.roboclaw_proto.CurrentSpeedRequest.Builder> internal__static_amber_roboclaw_proto_CurrentSpeedRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_amber_roboclaw_proto_CurrentSpeed__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::amber.roboclaw_proto.CurrentSpeed, global::amber.roboclaw_proto.CurrentSpeed.Builder> internal__static_amber_roboclaw_proto_CurrentSpeed__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_amber_MotorsSpeed__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Amber.Protos.MotorsSpeed, global::Amber.Protos.MotorsSpeed.Builder> internal__static_amber_MotorsSpeed__FieldAccessorTable;
     #endregion
     #region Descriptor
     public static pbd::FileDescriptor Descriptor {
@@ -48,53 +39,34 @@ namespace amber.roboclaw_proto {
     
     static Roboclaw() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
-          "Cg5yb2JvY2xhdy5wcm90bxIUYW1iZXIucm9ib2NsYXdfcHJvdG8aD2RyaXZl" + 
-          "cm1zZy5wcm90byK0AQoNTW90b3JzQ29tbWFuZBIPCgdhZGRyZXNzGAEgAigN" + 
-          "Eg8KB20xU3BlZWQYAiABKAUSDwoHbTFBY2NlbBgDIAEoDRISCgptMURpc3Rh" + 
-          "bmNlGAQgASgNEhIKCm0xQnVmZmVyZWQYBSABKAgSDwoHbTJTcGVlZBgGIAEo" + 
-          "BRIPCgdtMkFjY2VsGAcgASgNEhIKCm0yRGlzdGFuY2UYCCABKA0SEgoKbTJC" + 
-          "dWZmZXJlZBgJIAEoCCJYChZTZXRQaWRDb25zdGFudHNSZXF1ZXN0Eg8KB2Fk" + 
-          "ZHJlc3MYASACKA0SDAoEcXBwcxgCIAIoDRIJCgFwGAMgAigNEgkKAWkYBCAC" + 
-          "KA0SCQoBZBgFIAIoDSJWChNDdXJyZW50U3BlZWRSZXF1ZXN0Eg8KB2FkZHJl" + 
-          "c3MYASACKA0SFgoHbTFTcGVlZBgCIAIoCDoFZmFsc2USFgoHbTJTcGVlZBgD" + 
-          "IAIoCDoFZmFsc2UiQQoMQ3VycmVudFNwZWVkEg8KB2FkZHJlc3MYASACKA0S" + 
-          "DwoHbTFTcGVlZBgCIAEoBRIPCgdtMlNwZWVkGAMgASgFOk0KDm1vdG9yc0Nv" + 
-          "bW1hbmRzEhAuYW1iZXIuRHJpdmVyTXNnGAogAygLMiMuYW1iZXIucm9ib2Ns" + 
-          "YXdfcHJvdG8uTW90b3JzQ29tbWFuZDpZChRjdXJyZW50U3BlZWRSZXF1ZXN0" + 
-          "cxIQLmFtYmVyLkRyaXZlck1zZxgLIAMoCzIpLmFtYmVyLnJvYm9jbGF3X3By" + 
-          "b3RvLkN1cnJlbnRTcGVlZFJlcXVlc3Q6SwoNY3VycmVudFNwZWVkcxIQLmFt" + 
-          "YmVyLkRyaXZlck1zZxgMIAMoCzIiLmFtYmVyLnJvYm9jbGF3X3Byb3RvLkN1" + 
-          "cnJlbnRTcGVlZDpfChdzZXRQaWRDb25zdGFudHNSZXF1ZXN0cxIQLmFtYmVy" + 
-          "LkRyaXZlck1zZxgNIAMoCzIsLmFtYmVyLnJvYm9jbGF3X3Byb3RvLlNldFBp" + 
-          "ZENvbnN0YW50c1JlcXVlc3RCHwoOcm9ib2NsYXcucHJvdG9CDVJvYm9jbGF3" + 
-          "UHJvdG8=");
+          "Cg5yb2JvY2xhdy5wcm90bxIFYW1iZXIaJGdvb2dsZS9wcm90b2J1Zi9jc2hh" + 
+          "cnBfb3B0aW9ucy5wcm90bxoPZHJpdmVybXNnLnByb3RvIm0KC01vdG9yc1Nw" + 
+          "ZWVkEhYKDmZyb250TGVmdFNwZWVkGAEgASgFEhcKD2Zyb250UmlnaHRTcGVl" + 
+          "ZBgCIAEoBRIVCg1yZWFyTGVmdFNwZWVkGAMgASgFEhYKDnJlYXJSaWdodFNw" + 
+          "ZWVkGAQgASgFOjsKDW1vdG9yc0NvbW1hbmQSEC5hbWJlci5Ecml2ZXJNc2cY" + 
+          "CiABKAsyEi5hbWJlci5Nb3RvcnNTcGVlZDotChNjdXJyZW50U3BlZWRSZXF1" + 
+          "ZXN0EhAuYW1iZXIuRHJpdmVyTXNnGAsgASgIOjoKDGN1cnJlbnRTcGVlZBIQ" + 
+          "LmFtYmVyLkRyaXZlck1zZxgMIAEoCzISLmFtYmVyLk1vdG9yc1NwZWVkQhvC" + 
+          "PhgKDEFtYmVyLlByb3RvcxIIUm9ib2NsYXc=");
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
-        internal__static_amber_roboclaw_proto_MotorsCommand__Descriptor = Descriptor.MessageTypes[0];
-        internal__static_amber_roboclaw_proto_MotorsCommand__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::amber.roboclaw_proto.MotorsCommand, global::amber.roboclaw_proto.MotorsCommand.Builder>(internal__static_amber_roboclaw_proto_MotorsCommand__Descriptor,
-                new string[] { "Address", "M1Speed", "M1Accel", "M1Distance", "M1Buffered", "M2Speed", "M2Accel", "M2Distance", "M2Buffered", });
-        internal__static_amber_roboclaw_proto_SetPidConstantsRequest__Descriptor = Descriptor.MessageTypes[1];
-        internal__static_amber_roboclaw_proto_SetPidConstantsRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::amber.roboclaw_proto.SetPidConstantsRequest, global::amber.roboclaw_proto.SetPidConstantsRequest.Builder>(internal__static_amber_roboclaw_proto_SetPidConstantsRequest__Descriptor,
-                new string[] { "Address", "Qpps", "P", "I", "D", });
-        internal__static_amber_roboclaw_proto_CurrentSpeedRequest__Descriptor = Descriptor.MessageTypes[2];
-        internal__static_amber_roboclaw_proto_CurrentSpeedRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::amber.roboclaw_proto.CurrentSpeedRequest, global::amber.roboclaw_proto.CurrentSpeedRequest.Builder>(internal__static_amber_roboclaw_proto_CurrentSpeedRequest__Descriptor,
-                new string[] { "Address", "M1Speed", "M2Speed", });
-        internal__static_amber_roboclaw_proto_CurrentSpeed__Descriptor = Descriptor.MessageTypes[3];
-        internal__static_amber_roboclaw_proto_CurrentSpeed__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::amber.roboclaw_proto.CurrentSpeed, global::amber.roboclaw_proto.CurrentSpeed.Builder>(internal__static_amber_roboclaw_proto_CurrentSpeed__Descriptor,
-                new string[] { "Address", "M1Speed", "M2Speed", });
-        global::amber.roboclaw_proto.Roboclaw.MotorsCommands = pb::GeneratedRepeatExtension<global::amber.roboclaw_proto.MotorsCommand>.CreateInstance(global::amber.roboclaw_proto.Roboclaw.Descriptor.Extensions[0]);
-        global::amber.roboclaw_proto.Roboclaw.CurrentSpeedRequests = pb::GeneratedRepeatExtension<global::amber.roboclaw_proto.CurrentSpeedRequest>.CreateInstance(global::amber.roboclaw_proto.Roboclaw.Descriptor.Extensions[1]);
-        global::amber.roboclaw_proto.Roboclaw.CurrentSpeeds = pb::GeneratedRepeatExtension<global::amber.roboclaw_proto.CurrentSpeed>.CreateInstance(global::amber.roboclaw_proto.Roboclaw.Descriptor.Extensions[2]);
-        global::amber.roboclaw_proto.Roboclaw.SetPidConstantsRequests = pb::GeneratedRepeatExtension<global::amber.roboclaw_proto.SetPidConstantsRequest>.CreateInstance(global::amber.roboclaw_proto.Roboclaw.Descriptor.Extensions[3]);
-        return null;
+        internal__static_amber_MotorsSpeed__Descriptor = Descriptor.MessageTypes[0];
+        internal__static_amber_MotorsSpeed__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Amber.Protos.MotorsSpeed, global::Amber.Protos.MotorsSpeed.Builder>(internal__static_amber_MotorsSpeed__Descriptor,
+                new string[] { "FrontLeftSpeed", "FrontRightSpeed", "RearLeftSpeed", "RearRightSpeed", });
+        global::Amber.Protos.Roboclaw.MotorsCommand = pb::GeneratedSingleExtension<global::Amber.Protos.MotorsSpeed>.CreateInstance(global::Amber.Protos.Roboclaw.Descriptor.Extensions[0]);
+        global::Amber.Protos.Roboclaw.CurrentSpeedRequest = pb::GeneratedSingleExtension<bool>.CreateInstance(global::Amber.Protos.Roboclaw.Descriptor.Extensions[1]);
+        global::Amber.Protos.Roboclaw.CurrentSpeed = pb::GeneratedSingleExtension<global::Amber.Protos.MotorsSpeed>.CreateInstance(global::Amber.Protos.Roboclaw.Descriptor.Extensions[2]);
+        pb::ExtensionRegistry registry = pb::ExtensionRegistry.CreateInstance();
+        RegisterAllExtensions(registry);
+        global::Google.ProtocolBuffers.DescriptorProtos.CSharpOptions.RegisterAllExtensions(registry);
+        global::Amber.Protos.AmberProto.RegisterAllExtensions(registry);
+        return registry;
       };
       pbd::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
           new pbd::FileDescriptor[] {
-          global::amber.Drivermsg.Descriptor, 
+          global::Google.ProtocolBuffers.DescriptorProtos.CSharpOptions.Descriptor, 
+          global::Amber.Protos.AmberProto.Descriptor, 
           }, assigner);
     }
     #endregion
@@ -102,162 +74,91 @@ namespace amber.roboclaw_proto {
   }
   #region Messages
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  public sealed partial class MotorsCommand : pb::GeneratedMessage<MotorsCommand, MotorsCommand.Builder> {
-    private MotorsCommand() { }
-    private static readonly MotorsCommand defaultInstance = new MotorsCommand().MakeReadOnly();
-    private static readonly string[] _motorsCommandFieldNames = new string[] { "address", "m1Accel", "m1Buffered", "m1Distance", "m1Speed", "m2Accel", "m2Buffered", "m2Distance", "m2Speed" };
-    private static readonly uint[] _motorsCommandFieldTags = new uint[] { 8, 24, 40, 32, 16, 56, 72, 64, 48 };
-    public static MotorsCommand DefaultInstance {
+  public sealed partial class MotorsSpeed : pb::GeneratedMessage<MotorsSpeed, MotorsSpeed.Builder> {
+    private MotorsSpeed() { }
+    private static readonly MotorsSpeed defaultInstance = new MotorsSpeed().MakeReadOnly();
+    private static readonly string[] _motorsSpeedFieldNames = new string[] { "frontLeftSpeed", "frontRightSpeed", "rearLeftSpeed", "rearRightSpeed" };
+    private static readonly uint[] _motorsSpeedFieldTags = new uint[] { 8, 16, 24, 32 };
+    public static MotorsSpeed DefaultInstance {
       get { return defaultInstance; }
     }
     
-    public override MotorsCommand DefaultInstanceForType {
+    public override MotorsSpeed DefaultInstanceForType {
       get { return DefaultInstance; }
     }
     
-    protected override MotorsCommand ThisMessage {
+    protected override MotorsSpeed ThisMessage {
       get { return this; }
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::amber.roboclaw_proto.Roboclaw.internal__static_amber_roboclaw_proto_MotorsCommand__Descriptor; }
+      get { return global::Amber.Protos.Roboclaw.internal__static_amber_MotorsSpeed__Descriptor; }
     }
     
-    protected override pb::FieldAccess.FieldAccessorTable<MotorsCommand, MotorsCommand.Builder> InternalFieldAccessors {
-      get { return global::amber.roboclaw_proto.Roboclaw.internal__static_amber_roboclaw_proto_MotorsCommand__FieldAccessorTable; }
+    protected override pb::FieldAccess.FieldAccessorTable<MotorsSpeed, MotorsSpeed.Builder> InternalFieldAccessors {
+      get { return global::Amber.Protos.Roboclaw.internal__static_amber_MotorsSpeed__FieldAccessorTable; }
     }
     
-    public const int AddressFieldNumber = 1;
-    private bool hasAddress;
-    private uint address_;
-    public bool HasAddress {
-      get { return hasAddress; }
+    public const int FrontLeftSpeedFieldNumber = 1;
+    private bool hasFrontLeftSpeed;
+    private int frontLeftSpeed_;
+    public bool HasFrontLeftSpeed {
+      get { return hasFrontLeftSpeed; }
     }
-    [global::System.CLSCompliant(false)]
-    public uint Address {
-      get { return address_; }
-    }
-    
-    public const int M1SpeedFieldNumber = 2;
-    private bool hasM1Speed;
-    private int m1Speed_;
-    public bool HasM1Speed {
-      get { return hasM1Speed; }
-    }
-    public int M1Speed {
-      get { return m1Speed_; }
+    public int FrontLeftSpeed {
+      get { return frontLeftSpeed_; }
     }
     
-    public const int M1AccelFieldNumber = 3;
-    private bool hasM1Accel;
-    private uint m1Accel_;
-    public bool HasM1Accel {
-      get { return hasM1Accel; }
+    public const int FrontRightSpeedFieldNumber = 2;
+    private bool hasFrontRightSpeed;
+    private int frontRightSpeed_;
+    public bool HasFrontRightSpeed {
+      get { return hasFrontRightSpeed; }
     }
-    [global::System.CLSCompliant(false)]
-    public uint M1Accel {
-      get { return m1Accel_; }
-    }
-    
-    public const int M1DistanceFieldNumber = 4;
-    private bool hasM1Distance;
-    private uint m1Distance_;
-    public bool HasM1Distance {
-      get { return hasM1Distance; }
-    }
-    [global::System.CLSCompliant(false)]
-    public uint M1Distance {
-      get { return m1Distance_; }
+    public int FrontRightSpeed {
+      get { return frontRightSpeed_; }
     }
     
-    public const int M1BufferedFieldNumber = 5;
-    private bool hasM1Buffered;
-    private bool m1Buffered_;
-    public bool HasM1Buffered {
-      get { return hasM1Buffered; }
+    public const int RearLeftSpeedFieldNumber = 3;
+    private bool hasRearLeftSpeed;
+    private int rearLeftSpeed_;
+    public bool HasRearLeftSpeed {
+      get { return hasRearLeftSpeed; }
     }
-    public bool M1Buffered {
-      get { return m1Buffered_; }
-    }
-    
-    public const int M2SpeedFieldNumber = 6;
-    private bool hasM2Speed;
-    private int m2Speed_;
-    public bool HasM2Speed {
-      get { return hasM2Speed; }
-    }
-    public int M2Speed {
-      get { return m2Speed_; }
+    public int RearLeftSpeed {
+      get { return rearLeftSpeed_; }
     }
     
-    public const int M2AccelFieldNumber = 7;
-    private bool hasM2Accel;
-    private uint m2Accel_;
-    public bool HasM2Accel {
-      get { return hasM2Accel; }
+    public const int RearRightSpeedFieldNumber = 4;
+    private bool hasRearRightSpeed;
+    private int rearRightSpeed_;
+    public bool HasRearRightSpeed {
+      get { return hasRearRightSpeed; }
     }
-    [global::System.CLSCompliant(false)]
-    public uint M2Accel {
-      get { return m2Accel_; }
-    }
-    
-    public const int M2DistanceFieldNumber = 8;
-    private bool hasM2Distance;
-    private uint m2Distance_;
-    public bool HasM2Distance {
-      get { return hasM2Distance; }
-    }
-    [global::System.CLSCompliant(false)]
-    public uint M2Distance {
-      get { return m2Distance_; }
-    }
-    
-    public const int M2BufferedFieldNumber = 9;
-    private bool hasM2Buffered;
-    private bool m2Buffered_;
-    public bool HasM2Buffered {
-      get { return hasM2Buffered; }
-    }
-    public bool M2Buffered {
-      get { return m2Buffered_; }
+    public int RearRightSpeed {
+      get { return rearRightSpeed_; }
     }
     
     public override bool IsInitialized {
       get {
-        if (!hasAddress) return false;
         return true;
       }
     }
     
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
-      string[] field_names = _motorsCommandFieldNames;
-      if (hasAddress) {
-        output.WriteUInt32(1, field_names[0], Address);
+      string[] field_names = _motorsSpeedFieldNames;
+      if (hasFrontLeftSpeed) {
+        output.WriteInt32(1, field_names[0], FrontLeftSpeed);
       }
-      if (hasM1Speed) {
-        output.WriteInt32(2, field_names[4], M1Speed);
+      if (hasFrontRightSpeed) {
+        output.WriteInt32(2, field_names[1], FrontRightSpeed);
       }
-      if (hasM1Accel) {
-        output.WriteUInt32(3, field_names[1], M1Accel);
+      if (hasRearLeftSpeed) {
+        output.WriteInt32(3, field_names[2], RearLeftSpeed);
       }
-      if (hasM1Distance) {
-        output.WriteUInt32(4, field_names[3], M1Distance);
-      }
-      if (hasM1Buffered) {
-        output.WriteBool(5, field_names[2], M1Buffered);
-      }
-      if (hasM2Speed) {
-        output.WriteInt32(6, field_names[8], M2Speed);
-      }
-      if (hasM2Accel) {
-        output.WriteUInt32(7, field_names[5], M2Accel);
-      }
-      if (hasM2Distance) {
-        output.WriteUInt32(8, field_names[7], M2Distance);
-      }
-      if (hasM2Buffered) {
-        output.WriteBool(9, field_names[6], M2Buffered);
+      if (hasRearRightSpeed) {
+        output.WriteInt32(4, field_names[3], RearRightSpeed);
       }
       UnknownFields.WriteTo(output);
     }
@@ -269,32 +170,17 @@ namespace amber.roboclaw_proto {
         if (size != -1) return size;
         
         size = 0;
-        if (hasAddress) {
-          size += pb::CodedOutputStream.ComputeUInt32Size(1, Address);
+        if (hasFrontLeftSpeed) {
+          size += pb::CodedOutputStream.ComputeInt32Size(1, FrontLeftSpeed);
         }
-        if (hasM1Speed) {
-          size += pb::CodedOutputStream.ComputeInt32Size(2, M1Speed);
+        if (hasFrontRightSpeed) {
+          size += pb::CodedOutputStream.ComputeInt32Size(2, FrontRightSpeed);
         }
-        if (hasM1Accel) {
-          size += pb::CodedOutputStream.ComputeUInt32Size(3, M1Accel);
+        if (hasRearLeftSpeed) {
+          size += pb::CodedOutputStream.ComputeInt32Size(3, RearLeftSpeed);
         }
-        if (hasM1Distance) {
-          size += pb::CodedOutputStream.ComputeUInt32Size(4, M1Distance);
-        }
-        if (hasM1Buffered) {
-          size += pb::CodedOutputStream.ComputeBoolSize(5, M1Buffered);
-        }
-        if (hasM2Speed) {
-          size += pb::CodedOutputStream.ComputeInt32Size(6, M2Speed);
-        }
-        if (hasM2Accel) {
-          size += pb::CodedOutputStream.ComputeUInt32Size(7, M2Accel);
-        }
-        if (hasM2Distance) {
-          size += pb::CodedOutputStream.ComputeUInt32Size(8, M2Distance);
-        }
-        if (hasM2Buffered) {
-          size += pb::CodedOutputStream.ComputeBoolSize(9, M2Buffered);
+        if (hasRearRightSpeed) {
+          size += pb::CodedOutputStream.ComputeInt32Size(4, RearRightSpeed);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -302,49 +188,49 @@ namespace amber.roboclaw_proto {
       }
     }
     
-    public static MotorsCommand ParseFrom(pb::ByteString data) {
+    public static MotorsSpeed ParseFrom(pb::ByteString data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
-    public static MotorsCommand ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+    public static MotorsSpeed ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
-    public static MotorsCommand ParseFrom(byte[] data) {
+    public static MotorsSpeed ParseFrom(byte[] data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
-    public static MotorsCommand ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+    public static MotorsSpeed ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
-    public static MotorsCommand ParseFrom(global::System.IO.Stream input) {
+    public static MotorsSpeed ParseFrom(global::System.IO.Stream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
-    public static MotorsCommand ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static MotorsSpeed ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
-    public static MotorsCommand ParseDelimitedFrom(global::System.IO.Stream input) {
+    public static MotorsSpeed ParseDelimitedFrom(global::System.IO.Stream input) {
       return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
     }
-    public static MotorsCommand ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static MotorsSpeed ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
     }
-    public static MotorsCommand ParseFrom(pb::ICodedInputStream input) {
+    public static MotorsSpeed ParseFrom(pb::ICodedInputStream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
-    public static MotorsCommand ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+    public static MotorsSpeed ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
-    private MotorsCommand MakeReadOnly() {
+    private MotorsSpeed MakeReadOnly() {
       return this;
     }
     
     public static Builder CreateBuilder() { return new Builder(); }
     public override Builder ToBuilder() { return CreateBuilder(this); }
     public override Builder CreateBuilderForType() { return new Builder(); }
-    public static Builder CreateBuilder(MotorsCommand prototype) {
+    public static Builder CreateBuilder(MotorsSpeed prototype) {
       return new Builder(prototype);
     }
     
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    public sealed partial class Builder : pb::GeneratedBuilder<MotorsCommand, Builder> {
+    public sealed partial class Builder : pb::GeneratedBuilder<MotorsSpeed, Builder> {
       protected override Builder ThisBuilder {
         get { return this; }
       }
@@ -352,18 +238,18 @@ namespace amber.roboclaw_proto {
         result = DefaultInstance;
         resultIsReadOnly = true;
       }
-      internal Builder(MotorsCommand cloneFrom) {
+      internal Builder(MotorsSpeed cloneFrom) {
         result = cloneFrom;
         resultIsReadOnly = true;
       }
       
       private bool resultIsReadOnly;
-      private MotorsCommand result;
+      private MotorsSpeed result;
       
-      private MotorsCommand PrepareBuilder() {
+      private MotorsSpeed PrepareBuilder() {
         if (resultIsReadOnly) {
-          MotorsCommand original = result;
-          result = new MotorsCommand();
+          MotorsSpeed original = result;
+          result = new MotorsSpeed();
           resultIsReadOnly = false;
           MergeFrom(original);
         }
@@ -374,7 +260,7 @@ namespace amber.roboclaw_proto {
         get { return result.IsInitialized; }
       }
       
-      protected override MotorsCommand MessageBeingBuilt {
+      protected override MotorsSpeed MessageBeingBuilt {
         get { return PrepareBuilder(); }
       }
       
@@ -393,14 +279,14 @@ namespace amber.roboclaw_proto {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::amber.roboclaw_proto.MotorsCommand.Descriptor; }
+        get { return global::Amber.Protos.MotorsSpeed.Descriptor; }
       }
       
-      public override MotorsCommand DefaultInstanceForType {
-        get { return global::amber.roboclaw_proto.MotorsCommand.DefaultInstance; }
+      public override MotorsSpeed DefaultInstanceForType {
+        get { return global::Amber.Protos.MotorsSpeed.DefaultInstance; }
       }
       
-      public override MotorsCommand BuildPartial() {
+      public override MotorsSpeed BuildPartial() {
         if (resultIsReadOnly) {
           return result;
         }
@@ -409,43 +295,28 @@ namespace amber.roboclaw_proto {
       }
       
       public override Builder MergeFrom(pb::IMessage other) {
-        if (other is MotorsCommand) {
-          return MergeFrom((MotorsCommand) other);
+        if (other is MotorsSpeed) {
+          return MergeFrom((MotorsSpeed) other);
         } else {
           base.MergeFrom(other);
           return this;
         }
       }
       
-      public override Builder MergeFrom(MotorsCommand other) {
-        if (other == global::amber.roboclaw_proto.MotorsCommand.DefaultInstance) return this;
+      public override Builder MergeFrom(MotorsSpeed other) {
+        if (other == global::Amber.Protos.MotorsSpeed.DefaultInstance) return this;
         PrepareBuilder();
-        if (other.HasAddress) {
-          Address = other.Address;
+        if (other.HasFrontLeftSpeed) {
+          FrontLeftSpeed = other.FrontLeftSpeed;
         }
-        if (other.HasM1Speed) {
-          M1Speed = other.M1Speed;
+        if (other.HasFrontRightSpeed) {
+          FrontRightSpeed = other.FrontRightSpeed;
         }
-        if (other.HasM1Accel) {
-          M1Accel = other.M1Accel;
+        if (other.HasRearLeftSpeed) {
+          RearLeftSpeed = other.RearLeftSpeed;
         }
-        if (other.HasM1Distance) {
-          M1Distance = other.M1Distance;
-        }
-        if (other.HasM1Buffered) {
-          M1Buffered = other.M1Buffered;
-        }
-        if (other.HasM2Speed) {
-          M2Speed = other.M2Speed;
-        }
-        if (other.HasM2Accel) {
-          M2Accel = other.M2Accel;
-        }
-        if (other.HasM2Distance) {
-          M2Distance = other.M2Distance;
-        }
-        if (other.HasM2Buffered) {
-          M2Buffered = other.M2Buffered;
+        if (other.HasRearRightSpeed) {
+          RearRightSpeed = other.RearRightSpeed;
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -462,9 +333,9 @@ namespace amber.roboclaw_proto {
         string field_name;
         while (input.ReadTag(out tag, out field_name)) {
           if(tag == 0 && field_name != null) {
-            int field_ordinal = global::System.Array.BinarySearch(_motorsCommandFieldNames, field_name, global::System.StringComparer.Ordinal);
+            int field_ordinal = global::System.Array.BinarySearch(_motorsSpeedFieldNames, field_name, global::System.StringComparer.Ordinal);
             if(field_ordinal >= 0)
-              tag = _motorsCommandFieldTags[field_ordinal];
+              tag = _motorsSpeedFieldTags[field_ordinal];
             else {
               if (unknownFields == null) {
                 unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
@@ -491,39 +362,19 @@ namespace amber.roboclaw_proto {
               break;
             }
             case 8: {
-              result.hasAddress = input.ReadUInt32(ref result.address_);
+              result.hasFrontLeftSpeed = input.ReadInt32(ref result.frontLeftSpeed_);
               break;
             }
             case 16: {
-              result.hasM1Speed = input.ReadInt32(ref result.m1Speed_);
+              result.hasFrontRightSpeed = input.ReadInt32(ref result.frontRightSpeed_);
               break;
             }
             case 24: {
-              result.hasM1Accel = input.ReadUInt32(ref result.m1Accel_);
+              result.hasRearLeftSpeed = input.ReadInt32(ref result.rearLeftSpeed_);
               break;
             }
             case 32: {
-              result.hasM1Distance = input.ReadUInt32(ref result.m1Distance_);
-              break;
-            }
-            case 40: {
-              result.hasM1Buffered = input.ReadBool(ref result.m1Buffered_);
-              break;
-            }
-            case 48: {
-              result.hasM2Speed = input.ReadInt32(ref result.m2Speed_);
-              break;
-            }
-            case 56: {
-              result.hasM2Accel = input.ReadUInt32(ref result.m2Accel_);
-              break;
-            }
-            case 64: {
-              result.hasM2Distance = input.ReadUInt32(ref result.m2Distance_);
-              break;
-            }
-            case 72: {
-              result.hasM2Buffered = input.ReadBool(ref result.m2Buffered_);
+              result.hasRearRightSpeed = input.ReadInt32(ref result.rearRightSpeed_);
               break;
             }
           }
@@ -536,1382 +387,88 @@ namespace amber.roboclaw_proto {
       }
       
       
-      public bool HasAddress {
-        get { return result.hasAddress; }
+      public bool HasFrontLeftSpeed {
+        get { return result.hasFrontLeftSpeed; }
       }
-      [global::System.CLSCompliant(false)]
-      public uint Address {
-        get { return result.Address; }
-        set { SetAddress(value); }
+      public int FrontLeftSpeed {
+        get { return result.FrontLeftSpeed; }
+        set { SetFrontLeftSpeed(value); }
       }
-      [global::System.CLSCompliant(false)]
-      public Builder SetAddress(uint value) {
+      public Builder SetFrontLeftSpeed(int value) {
         PrepareBuilder();
-        result.hasAddress = true;
-        result.address_ = value;
+        result.hasFrontLeftSpeed = true;
+        result.frontLeftSpeed_ = value;
         return this;
       }
-      public Builder ClearAddress() {
+      public Builder ClearFrontLeftSpeed() {
         PrepareBuilder();
-        result.hasAddress = false;
-        result.address_ = 0;
+        result.hasFrontLeftSpeed = false;
+        result.frontLeftSpeed_ = 0;
         return this;
       }
       
-      public bool HasM1Speed {
-        get { return result.hasM1Speed; }
+      public bool HasFrontRightSpeed {
+        get { return result.hasFrontRightSpeed; }
       }
-      public int M1Speed {
-        get { return result.M1Speed; }
-        set { SetM1Speed(value); }
+      public int FrontRightSpeed {
+        get { return result.FrontRightSpeed; }
+        set { SetFrontRightSpeed(value); }
       }
-      public Builder SetM1Speed(int value) {
+      public Builder SetFrontRightSpeed(int value) {
         PrepareBuilder();
-        result.hasM1Speed = true;
-        result.m1Speed_ = value;
+        result.hasFrontRightSpeed = true;
+        result.frontRightSpeed_ = value;
         return this;
       }
-      public Builder ClearM1Speed() {
+      public Builder ClearFrontRightSpeed() {
         PrepareBuilder();
-        result.hasM1Speed = false;
-        result.m1Speed_ = 0;
+        result.hasFrontRightSpeed = false;
+        result.frontRightSpeed_ = 0;
         return this;
       }
       
-      public bool HasM1Accel {
-        get { return result.hasM1Accel; }
+      public bool HasRearLeftSpeed {
+        get { return result.hasRearLeftSpeed; }
       }
-      [global::System.CLSCompliant(false)]
-      public uint M1Accel {
-        get { return result.M1Accel; }
-        set { SetM1Accel(value); }
+      public int RearLeftSpeed {
+        get { return result.RearLeftSpeed; }
+        set { SetRearLeftSpeed(value); }
       }
-      [global::System.CLSCompliant(false)]
-      public Builder SetM1Accel(uint value) {
+      public Builder SetRearLeftSpeed(int value) {
         PrepareBuilder();
-        result.hasM1Accel = true;
-        result.m1Accel_ = value;
+        result.hasRearLeftSpeed = true;
+        result.rearLeftSpeed_ = value;
         return this;
       }
-      public Builder ClearM1Accel() {
+      public Builder ClearRearLeftSpeed() {
         PrepareBuilder();
-        result.hasM1Accel = false;
-        result.m1Accel_ = 0;
+        result.hasRearLeftSpeed = false;
+        result.rearLeftSpeed_ = 0;
         return this;
       }
       
-      public bool HasM1Distance {
-        get { return result.hasM1Distance; }
+      public bool HasRearRightSpeed {
+        get { return result.hasRearRightSpeed; }
       }
-      [global::System.CLSCompliant(false)]
-      public uint M1Distance {
-        get { return result.M1Distance; }
-        set { SetM1Distance(value); }
+      public int RearRightSpeed {
+        get { return result.RearRightSpeed; }
+        set { SetRearRightSpeed(value); }
       }
-      [global::System.CLSCompliant(false)]
-      public Builder SetM1Distance(uint value) {
+      public Builder SetRearRightSpeed(int value) {
         PrepareBuilder();
-        result.hasM1Distance = true;
-        result.m1Distance_ = value;
+        result.hasRearRightSpeed = true;
+        result.rearRightSpeed_ = value;
         return this;
       }
-      public Builder ClearM1Distance() {
+      public Builder ClearRearRightSpeed() {
         PrepareBuilder();
-        result.hasM1Distance = false;
-        result.m1Distance_ = 0;
-        return this;
-      }
-      
-      public bool HasM1Buffered {
-        get { return result.hasM1Buffered; }
-      }
-      public bool M1Buffered {
-        get { return result.M1Buffered; }
-        set { SetM1Buffered(value); }
-      }
-      public Builder SetM1Buffered(bool value) {
-        PrepareBuilder();
-        result.hasM1Buffered = true;
-        result.m1Buffered_ = value;
-        return this;
-      }
-      public Builder ClearM1Buffered() {
-        PrepareBuilder();
-        result.hasM1Buffered = false;
-        result.m1Buffered_ = false;
-        return this;
-      }
-      
-      public bool HasM2Speed {
-        get { return result.hasM2Speed; }
-      }
-      public int M2Speed {
-        get { return result.M2Speed; }
-        set { SetM2Speed(value); }
-      }
-      public Builder SetM2Speed(int value) {
-        PrepareBuilder();
-        result.hasM2Speed = true;
-        result.m2Speed_ = value;
-        return this;
-      }
-      public Builder ClearM2Speed() {
-        PrepareBuilder();
-        result.hasM2Speed = false;
-        result.m2Speed_ = 0;
-        return this;
-      }
-      
-      public bool HasM2Accel {
-        get { return result.hasM2Accel; }
-      }
-      [global::System.CLSCompliant(false)]
-      public uint M2Accel {
-        get { return result.M2Accel; }
-        set { SetM2Accel(value); }
-      }
-      [global::System.CLSCompliant(false)]
-      public Builder SetM2Accel(uint value) {
-        PrepareBuilder();
-        result.hasM2Accel = true;
-        result.m2Accel_ = value;
-        return this;
-      }
-      public Builder ClearM2Accel() {
-        PrepareBuilder();
-        result.hasM2Accel = false;
-        result.m2Accel_ = 0;
-        return this;
-      }
-      
-      public bool HasM2Distance {
-        get { return result.hasM2Distance; }
-      }
-      [global::System.CLSCompliant(false)]
-      public uint M2Distance {
-        get { return result.M2Distance; }
-        set { SetM2Distance(value); }
-      }
-      [global::System.CLSCompliant(false)]
-      public Builder SetM2Distance(uint value) {
-        PrepareBuilder();
-        result.hasM2Distance = true;
-        result.m2Distance_ = value;
-        return this;
-      }
-      public Builder ClearM2Distance() {
-        PrepareBuilder();
-        result.hasM2Distance = false;
-        result.m2Distance_ = 0;
-        return this;
-      }
-      
-      public bool HasM2Buffered {
-        get { return result.hasM2Buffered; }
-      }
-      public bool M2Buffered {
-        get { return result.M2Buffered; }
-        set { SetM2Buffered(value); }
-      }
-      public Builder SetM2Buffered(bool value) {
-        PrepareBuilder();
-        result.hasM2Buffered = true;
-        result.m2Buffered_ = value;
-        return this;
-      }
-      public Builder ClearM2Buffered() {
-        PrepareBuilder();
-        result.hasM2Buffered = false;
-        result.m2Buffered_ = false;
+        result.hasRearRightSpeed = false;
+        result.rearRightSpeed_ = 0;
         return this;
       }
     }
-    static MotorsCommand() {
-      object.ReferenceEquals(global::amber.roboclaw_proto.Roboclaw.Descriptor, null);
-    }
-  }
-  
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  public sealed partial class SetPidConstantsRequest : pb::GeneratedMessage<SetPidConstantsRequest, SetPidConstantsRequest.Builder> {
-    private SetPidConstantsRequest() { }
-    private static readonly SetPidConstantsRequest defaultInstance = new SetPidConstantsRequest().MakeReadOnly();
-    private static readonly string[] _setPidConstantsRequestFieldNames = new string[] { "address", "d", "i", "p", "qpps" };
-    private static readonly uint[] _setPidConstantsRequestFieldTags = new uint[] { 8, 40, 32, 24, 16 };
-    public static SetPidConstantsRequest DefaultInstance {
-      get { return defaultInstance; }
-    }
-    
-    public override SetPidConstantsRequest DefaultInstanceForType {
-      get { return DefaultInstance; }
-    }
-    
-    protected override SetPidConstantsRequest ThisMessage {
-      get { return this; }
-    }
-    
-    public static pbd::MessageDescriptor Descriptor {
-      get { return global::amber.roboclaw_proto.Roboclaw.internal__static_amber_roboclaw_proto_SetPidConstantsRequest__Descriptor; }
-    }
-    
-    protected override pb::FieldAccess.FieldAccessorTable<SetPidConstantsRequest, SetPidConstantsRequest.Builder> InternalFieldAccessors {
-      get { return global::amber.roboclaw_proto.Roboclaw.internal__static_amber_roboclaw_proto_SetPidConstantsRequest__FieldAccessorTable; }
-    }
-    
-    public const int AddressFieldNumber = 1;
-    private bool hasAddress;
-    private uint address_;
-    public bool HasAddress {
-      get { return hasAddress; }
-    }
-    [global::System.CLSCompliant(false)]
-    public uint Address {
-      get { return address_; }
-    }
-    
-    public const int QppsFieldNumber = 2;
-    private bool hasQpps;
-    private uint qpps_;
-    public bool HasQpps {
-      get { return hasQpps; }
-    }
-    [global::System.CLSCompliant(false)]
-    public uint Qpps {
-      get { return qpps_; }
-    }
-    
-    public const int PFieldNumber = 3;
-    private bool hasP;
-    private uint p_;
-    public bool HasP {
-      get { return hasP; }
-    }
-    [global::System.CLSCompliant(false)]
-    public uint P {
-      get { return p_; }
-    }
-    
-    public const int IFieldNumber = 4;
-    private bool hasI;
-    private uint i_;
-    public bool HasI {
-      get { return hasI; }
-    }
-    [global::System.CLSCompliant(false)]
-    public uint I {
-      get { return i_; }
-    }
-    
-    public const int DFieldNumber = 5;
-    private bool hasD;
-    private uint d_;
-    public bool HasD {
-      get { return hasD; }
-    }
-    [global::System.CLSCompliant(false)]
-    public uint D {
-      get { return d_; }
-    }
-    
-    public override bool IsInitialized {
-      get {
-        if (!hasAddress) return false;
-        if (!hasQpps) return false;
-        if (!hasP) return false;
-        if (!hasI) return false;
-        if (!hasD) return false;
-        return true;
-      }
-    }
-    
-    public override void WriteTo(pb::ICodedOutputStream output) {
-      int size = SerializedSize;
-      string[] field_names = _setPidConstantsRequestFieldNames;
-      if (hasAddress) {
-        output.WriteUInt32(1, field_names[0], Address);
-      }
-      if (hasQpps) {
-        output.WriteUInt32(2, field_names[4], Qpps);
-      }
-      if (hasP) {
-        output.WriteUInt32(3, field_names[3], P);
-      }
-      if (hasI) {
-        output.WriteUInt32(4, field_names[2], I);
-      }
-      if (hasD) {
-        output.WriteUInt32(5, field_names[1], D);
-      }
-      UnknownFields.WriteTo(output);
-    }
-    
-    private int memoizedSerializedSize = -1;
-    public override int SerializedSize {
-      get {
-        int size = memoizedSerializedSize;
-        if (size != -1) return size;
-        
-        size = 0;
-        if (hasAddress) {
-          size += pb::CodedOutputStream.ComputeUInt32Size(1, Address);
-        }
-        if (hasQpps) {
-          size += pb::CodedOutputStream.ComputeUInt32Size(2, Qpps);
-        }
-        if (hasP) {
-          size += pb::CodedOutputStream.ComputeUInt32Size(3, P);
-        }
-        if (hasI) {
-          size += pb::CodedOutputStream.ComputeUInt32Size(4, I);
-        }
-        if (hasD) {
-          size += pb::CodedOutputStream.ComputeUInt32Size(5, D);
-        }
-        size += UnknownFields.SerializedSize;
-        memoizedSerializedSize = size;
-        return size;
-      }
-    }
-    
-    public static SetPidConstantsRequest ParseFrom(pb::ByteString data) {
-      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
-    }
-    public static SetPidConstantsRequest ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
-      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
-    }
-    public static SetPidConstantsRequest ParseFrom(byte[] data) {
-      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
-    }
-    public static SetPidConstantsRequest ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
-      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
-    }
-    public static SetPidConstantsRequest ParseFrom(global::System.IO.Stream input) {
-      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
-    }
-    public static SetPidConstantsRequest ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
-      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
-    }
-    public static SetPidConstantsRequest ParseDelimitedFrom(global::System.IO.Stream input) {
-      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
-    }
-    public static SetPidConstantsRequest ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
-      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
-    }
-    public static SetPidConstantsRequest ParseFrom(pb::ICodedInputStream input) {
-      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
-    }
-    public static SetPidConstantsRequest ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
-      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
-    }
-    private SetPidConstantsRequest MakeReadOnly() {
-      return this;
-    }
-    
-    public static Builder CreateBuilder() { return new Builder(); }
-    public override Builder ToBuilder() { return CreateBuilder(this); }
-    public override Builder CreateBuilderForType() { return new Builder(); }
-    public static Builder CreateBuilder(SetPidConstantsRequest prototype) {
-      return new Builder(prototype);
-    }
-    
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    public sealed partial class Builder : pb::GeneratedBuilder<SetPidConstantsRequest, Builder> {
-      protected override Builder ThisBuilder {
-        get { return this; }
-      }
-      public Builder() {
-        result = DefaultInstance;
-        resultIsReadOnly = true;
-      }
-      internal Builder(SetPidConstantsRequest cloneFrom) {
-        result = cloneFrom;
-        resultIsReadOnly = true;
-      }
-      
-      private bool resultIsReadOnly;
-      private SetPidConstantsRequest result;
-      
-      private SetPidConstantsRequest PrepareBuilder() {
-        if (resultIsReadOnly) {
-          SetPidConstantsRequest original = result;
-          result = new SetPidConstantsRequest();
-          resultIsReadOnly = false;
-          MergeFrom(original);
-        }
-        return result;
-      }
-      
-      public override bool IsInitialized {
-        get { return result.IsInitialized; }
-      }
-      
-      protected override SetPidConstantsRequest MessageBeingBuilt {
-        get { return PrepareBuilder(); }
-      }
-      
-      public override Builder Clear() {
-        result = DefaultInstance;
-        resultIsReadOnly = true;
-        return this;
-      }
-      
-      public override Builder Clone() {
-        if (resultIsReadOnly) {
-          return new Builder(result);
-        } else {
-          return new Builder().MergeFrom(result);
-        }
-      }
-      
-      public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::amber.roboclaw_proto.SetPidConstantsRequest.Descriptor; }
-      }
-      
-      public override SetPidConstantsRequest DefaultInstanceForType {
-        get { return global::amber.roboclaw_proto.SetPidConstantsRequest.DefaultInstance; }
-      }
-      
-      public override SetPidConstantsRequest BuildPartial() {
-        if (resultIsReadOnly) {
-          return result;
-        }
-        resultIsReadOnly = true;
-        return result.MakeReadOnly();
-      }
-      
-      public override Builder MergeFrom(pb::IMessage other) {
-        if (other is SetPidConstantsRequest) {
-          return MergeFrom((SetPidConstantsRequest) other);
-        } else {
-          base.MergeFrom(other);
-          return this;
-        }
-      }
-      
-      public override Builder MergeFrom(SetPidConstantsRequest other) {
-        if (other == global::amber.roboclaw_proto.SetPidConstantsRequest.DefaultInstance) return this;
-        PrepareBuilder();
-        if (other.HasAddress) {
-          Address = other.Address;
-        }
-        if (other.HasQpps) {
-          Qpps = other.Qpps;
-        }
-        if (other.HasP) {
-          P = other.P;
-        }
-        if (other.HasI) {
-          I = other.I;
-        }
-        if (other.HasD) {
-          D = other.D;
-        }
-        this.MergeUnknownFields(other.UnknownFields);
-        return this;
-      }
-      
-      public override Builder MergeFrom(pb::ICodedInputStream input) {
-        return MergeFrom(input, pb::ExtensionRegistry.Empty);
-      }
-      
-      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
-        PrepareBuilder();
-        pb::UnknownFieldSet.Builder unknownFields = null;
-        uint tag;
-        string field_name;
-        while (input.ReadTag(out tag, out field_name)) {
-          if(tag == 0 && field_name != null) {
-            int field_ordinal = global::System.Array.BinarySearch(_setPidConstantsRequestFieldNames, field_name, global::System.StringComparer.Ordinal);
-            if(field_ordinal >= 0)
-              tag = _setPidConstantsRequestFieldTags[field_ordinal];
-            else {
-              if (unknownFields == null) {
-                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
-              }
-              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
-              continue;
-            }
-          }
-          switch (tag) {
-            case 0: {
-              throw pb::InvalidProtocolBufferException.InvalidTag();
-            }
-            default: {
-              if (pb::WireFormat.IsEndGroupTag(tag)) {
-                if (unknownFields != null) {
-                  this.UnknownFields = unknownFields.Build();
-                }
-                return this;
-              }
-              if (unknownFields == null) {
-                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
-              }
-              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
-              break;
-            }
-            case 8: {
-              result.hasAddress = input.ReadUInt32(ref result.address_);
-              break;
-            }
-            case 16: {
-              result.hasQpps = input.ReadUInt32(ref result.qpps_);
-              break;
-            }
-            case 24: {
-              result.hasP = input.ReadUInt32(ref result.p_);
-              break;
-            }
-            case 32: {
-              result.hasI = input.ReadUInt32(ref result.i_);
-              break;
-            }
-            case 40: {
-              result.hasD = input.ReadUInt32(ref result.d_);
-              break;
-            }
-          }
-        }
-        
-        if (unknownFields != null) {
-          this.UnknownFields = unknownFields.Build();
-        }
-        return this;
-      }
-      
-      
-      public bool HasAddress {
-        get { return result.hasAddress; }
-      }
-      [global::System.CLSCompliant(false)]
-      public uint Address {
-        get { return result.Address; }
-        set { SetAddress(value); }
-      }
-      [global::System.CLSCompliant(false)]
-      public Builder SetAddress(uint value) {
-        PrepareBuilder();
-        result.hasAddress = true;
-        result.address_ = value;
-        return this;
-      }
-      public Builder ClearAddress() {
-        PrepareBuilder();
-        result.hasAddress = false;
-        result.address_ = 0;
-        return this;
-      }
-      
-      public bool HasQpps {
-        get { return result.hasQpps; }
-      }
-      [global::System.CLSCompliant(false)]
-      public uint Qpps {
-        get { return result.Qpps; }
-        set { SetQpps(value); }
-      }
-      [global::System.CLSCompliant(false)]
-      public Builder SetQpps(uint value) {
-        PrepareBuilder();
-        result.hasQpps = true;
-        result.qpps_ = value;
-        return this;
-      }
-      public Builder ClearQpps() {
-        PrepareBuilder();
-        result.hasQpps = false;
-        result.qpps_ = 0;
-        return this;
-      }
-      
-      public bool HasP {
-        get { return result.hasP; }
-      }
-      [global::System.CLSCompliant(false)]
-      public uint P {
-        get { return result.P; }
-        set { SetP(value); }
-      }
-      [global::System.CLSCompliant(false)]
-      public Builder SetP(uint value) {
-        PrepareBuilder();
-        result.hasP = true;
-        result.p_ = value;
-        return this;
-      }
-      public Builder ClearP() {
-        PrepareBuilder();
-        result.hasP = false;
-        result.p_ = 0;
-        return this;
-      }
-      
-      public bool HasI {
-        get { return result.hasI; }
-      }
-      [global::System.CLSCompliant(false)]
-      public uint I {
-        get { return result.I; }
-        set { SetI(value); }
-      }
-      [global::System.CLSCompliant(false)]
-      public Builder SetI(uint value) {
-        PrepareBuilder();
-        result.hasI = true;
-        result.i_ = value;
-        return this;
-      }
-      public Builder ClearI() {
-        PrepareBuilder();
-        result.hasI = false;
-        result.i_ = 0;
-        return this;
-      }
-      
-      public bool HasD {
-        get { return result.hasD; }
-      }
-      [global::System.CLSCompliant(false)]
-      public uint D {
-        get { return result.D; }
-        set { SetD(value); }
-      }
-      [global::System.CLSCompliant(false)]
-      public Builder SetD(uint value) {
-        PrepareBuilder();
-        result.hasD = true;
-        result.d_ = value;
-        return this;
-      }
-      public Builder ClearD() {
-        PrepareBuilder();
-        result.hasD = false;
-        result.d_ = 0;
-        return this;
-      }
-    }
-    static SetPidConstantsRequest() {
-      object.ReferenceEquals(global::amber.roboclaw_proto.Roboclaw.Descriptor, null);
-    }
-  }
-  
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  public sealed partial class CurrentSpeedRequest : pb::GeneratedMessage<CurrentSpeedRequest, CurrentSpeedRequest.Builder> {
-    private CurrentSpeedRequest() { }
-    private static readonly CurrentSpeedRequest defaultInstance = new CurrentSpeedRequest().MakeReadOnly();
-    private static readonly string[] _currentSpeedRequestFieldNames = new string[] { "address", "m1Speed", "m2Speed" };
-    private static readonly uint[] _currentSpeedRequestFieldTags = new uint[] { 8, 16, 24 };
-    public static CurrentSpeedRequest DefaultInstance {
-      get { return defaultInstance; }
-    }
-    
-    public override CurrentSpeedRequest DefaultInstanceForType {
-      get { return DefaultInstance; }
-    }
-    
-    protected override CurrentSpeedRequest ThisMessage {
-      get { return this; }
-    }
-    
-    public static pbd::MessageDescriptor Descriptor {
-      get { return global::amber.roboclaw_proto.Roboclaw.internal__static_amber_roboclaw_proto_CurrentSpeedRequest__Descriptor; }
-    }
-    
-    protected override pb::FieldAccess.FieldAccessorTable<CurrentSpeedRequest, CurrentSpeedRequest.Builder> InternalFieldAccessors {
-      get { return global::amber.roboclaw_proto.Roboclaw.internal__static_amber_roboclaw_proto_CurrentSpeedRequest__FieldAccessorTable; }
-    }
-    
-    public const int AddressFieldNumber = 1;
-    private bool hasAddress;
-    private uint address_;
-    public bool HasAddress {
-      get { return hasAddress; }
-    }
-    [global::System.CLSCompliant(false)]
-    public uint Address {
-      get { return address_; }
-    }
-    
-    public const int M1SpeedFieldNumber = 2;
-    private bool hasM1Speed;
-    private bool m1Speed_;
-    public bool HasM1Speed {
-      get { return hasM1Speed; }
-    }
-    public bool M1Speed {
-      get { return m1Speed_; }
-    }
-    
-    public const int M2SpeedFieldNumber = 3;
-    private bool hasM2Speed;
-    private bool m2Speed_;
-    public bool HasM2Speed {
-      get { return hasM2Speed; }
-    }
-    public bool M2Speed {
-      get { return m2Speed_; }
-    }
-    
-    public override bool IsInitialized {
-      get {
-        if (!hasAddress) return false;
-        if (!hasM1Speed) return false;
-        if (!hasM2Speed) return false;
-        return true;
-      }
-    }
-    
-    public override void WriteTo(pb::ICodedOutputStream output) {
-      int size = SerializedSize;
-      string[] field_names = _currentSpeedRequestFieldNames;
-      if (hasAddress) {
-        output.WriteUInt32(1, field_names[0], Address);
-      }
-      if (hasM1Speed) {
-        output.WriteBool(2, field_names[1], M1Speed);
-      }
-      if (hasM2Speed) {
-        output.WriteBool(3, field_names[2], M2Speed);
-      }
-      UnknownFields.WriteTo(output);
-    }
-    
-    private int memoizedSerializedSize = -1;
-    public override int SerializedSize {
-      get {
-        int size = memoizedSerializedSize;
-        if (size != -1) return size;
-        
-        size = 0;
-        if (hasAddress) {
-          size += pb::CodedOutputStream.ComputeUInt32Size(1, Address);
-        }
-        if (hasM1Speed) {
-          size += pb::CodedOutputStream.ComputeBoolSize(2, M1Speed);
-        }
-        if (hasM2Speed) {
-          size += pb::CodedOutputStream.ComputeBoolSize(3, M2Speed);
-        }
-        size += UnknownFields.SerializedSize;
-        memoizedSerializedSize = size;
-        return size;
-      }
-    }
-    
-    public static CurrentSpeedRequest ParseFrom(pb::ByteString data) {
-      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
-    }
-    public static CurrentSpeedRequest ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
-      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
-    }
-    public static CurrentSpeedRequest ParseFrom(byte[] data) {
-      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
-    }
-    public static CurrentSpeedRequest ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
-      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
-    }
-    public static CurrentSpeedRequest ParseFrom(global::System.IO.Stream input) {
-      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
-    }
-    public static CurrentSpeedRequest ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
-      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
-    }
-    public static CurrentSpeedRequest ParseDelimitedFrom(global::System.IO.Stream input) {
-      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
-    }
-    public static CurrentSpeedRequest ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
-      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
-    }
-    public static CurrentSpeedRequest ParseFrom(pb::ICodedInputStream input) {
-      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
-    }
-    public static CurrentSpeedRequest ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
-      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
-    }
-    private CurrentSpeedRequest MakeReadOnly() {
-      return this;
-    }
-    
-    public static Builder CreateBuilder() { return new Builder(); }
-    public override Builder ToBuilder() { return CreateBuilder(this); }
-    public override Builder CreateBuilderForType() { return new Builder(); }
-    public static Builder CreateBuilder(CurrentSpeedRequest prototype) {
-      return new Builder(prototype);
-    }
-    
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    public sealed partial class Builder : pb::GeneratedBuilder<CurrentSpeedRequest, Builder> {
-      protected override Builder ThisBuilder {
-        get { return this; }
-      }
-      public Builder() {
-        result = DefaultInstance;
-        resultIsReadOnly = true;
-      }
-      internal Builder(CurrentSpeedRequest cloneFrom) {
-        result = cloneFrom;
-        resultIsReadOnly = true;
-      }
-      
-      private bool resultIsReadOnly;
-      private CurrentSpeedRequest result;
-      
-      private CurrentSpeedRequest PrepareBuilder() {
-        if (resultIsReadOnly) {
-          CurrentSpeedRequest original = result;
-          result = new CurrentSpeedRequest();
-          resultIsReadOnly = false;
-          MergeFrom(original);
-        }
-        return result;
-      }
-      
-      public override bool IsInitialized {
-        get { return result.IsInitialized; }
-      }
-      
-      protected override CurrentSpeedRequest MessageBeingBuilt {
-        get { return PrepareBuilder(); }
-      }
-      
-      public override Builder Clear() {
-        result = DefaultInstance;
-        resultIsReadOnly = true;
-        return this;
-      }
-      
-      public override Builder Clone() {
-        if (resultIsReadOnly) {
-          return new Builder(result);
-        } else {
-          return new Builder().MergeFrom(result);
-        }
-      }
-      
-      public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::amber.roboclaw_proto.CurrentSpeedRequest.Descriptor; }
-      }
-      
-      public override CurrentSpeedRequest DefaultInstanceForType {
-        get { return global::amber.roboclaw_proto.CurrentSpeedRequest.DefaultInstance; }
-      }
-      
-      public override CurrentSpeedRequest BuildPartial() {
-        if (resultIsReadOnly) {
-          return result;
-        }
-        resultIsReadOnly = true;
-        return result.MakeReadOnly();
-      }
-      
-      public override Builder MergeFrom(pb::IMessage other) {
-        if (other is CurrentSpeedRequest) {
-          return MergeFrom((CurrentSpeedRequest) other);
-        } else {
-          base.MergeFrom(other);
-          return this;
-        }
-      }
-      
-      public override Builder MergeFrom(CurrentSpeedRequest other) {
-        if (other == global::amber.roboclaw_proto.CurrentSpeedRequest.DefaultInstance) return this;
-        PrepareBuilder();
-        if (other.HasAddress) {
-          Address = other.Address;
-        }
-        if (other.HasM1Speed) {
-          M1Speed = other.M1Speed;
-        }
-        if (other.HasM2Speed) {
-          M2Speed = other.M2Speed;
-        }
-        this.MergeUnknownFields(other.UnknownFields);
-        return this;
-      }
-      
-      public override Builder MergeFrom(pb::ICodedInputStream input) {
-        return MergeFrom(input, pb::ExtensionRegistry.Empty);
-      }
-      
-      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
-        PrepareBuilder();
-        pb::UnknownFieldSet.Builder unknownFields = null;
-        uint tag;
-        string field_name;
-        while (input.ReadTag(out tag, out field_name)) {
-          if(tag == 0 && field_name != null) {
-            int field_ordinal = global::System.Array.BinarySearch(_currentSpeedRequestFieldNames, field_name, global::System.StringComparer.Ordinal);
-            if(field_ordinal >= 0)
-              tag = _currentSpeedRequestFieldTags[field_ordinal];
-            else {
-              if (unknownFields == null) {
-                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
-              }
-              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
-              continue;
-            }
-          }
-          switch (tag) {
-            case 0: {
-              throw pb::InvalidProtocolBufferException.InvalidTag();
-            }
-            default: {
-              if (pb::WireFormat.IsEndGroupTag(tag)) {
-                if (unknownFields != null) {
-                  this.UnknownFields = unknownFields.Build();
-                }
-                return this;
-              }
-              if (unknownFields == null) {
-                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
-              }
-              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
-              break;
-            }
-            case 8: {
-              result.hasAddress = input.ReadUInt32(ref result.address_);
-              break;
-            }
-            case 16: {
-              result.hasM1Speed = input.ReadBool(ref result.m1Speed_);
-              break;
-            }
-            case 24: {
-              result.hasM2Speed = input.ReadBool(ref result.m2Speed_);
-              break;
-            }
-          }
-        }
-        
-        if (unknownFields != null) {
-          this.UnknownFields = unknownFields.Build();
-        }
-        return this;
-      }
-      
-      
-      public bool HasAddress {
-        get { return result.hasAddress; }
-      }
-      [global::System.CLSCompliant(false)]
-      public uint Address {
-        get { return result.Address; }
-        set { SetAddress(value); }
-      }
-      [global::System.CLSCompliant(false)]
-      public Builder SetAddress(uint value) {
-        PrepareBuilder();
-        result.hasAddress = true;
-        result.address_ = value;
-        return this;
-      }
-      public Builder ClearAddress() {
-        PrepareBuilder();
-        result.hasAddress = false;
-        result.address_ = 0;
-        return this;
-      }
-      
-      public bool HasM1Speed {
-        get { return result.hasM1Speed; }
-      }
-      public bool M1Speed {
-        get { return result.M1Speed; }
-        set { SetM1Speed(value); }
-      }
-      public Builder SetM1Speed(bool value) {
-        PrepareBuilder();
-        result.hasM1Speed = true;
-        result.m1Speed_ = value;
-        return this;
-      }
-      public Builder ClearM1Speed() {
-        PrepareBuilder();
-        result.hasM1Speed = false;
-        result.m1Speed_ = false;
-        return this;
-      }
-      
-      public bool HasM2Speed {
-        get { return result.hasM2Speed; }
-      }
-      public bool M2Speed {
-        get { return result.M2Speed; }
-        set { SetM2Speed(value); }
-      }
-      public Builder SetM2Speed(bool value) {
-        PrepareBuilder();
-        result.hasM2Speed = true;
-        result.m2Speed_ = value;
-        return this;
-      }
-      public Builder ClearM2Speed() {
-        PrepareBuilder();
-        result.hasM2Speed = false;
-        result.m2Speed_ = false;
-        return this;
-      }
-    }
-    static CurrentSpeedRequest() {
-      object.ReferenceEquals(global::amber.roboclaw_proto.Roboclaw.Descriptor, null);
-    }
-  }
-  
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  public sealed partial class CurrentSpeed : pb::GeneratedMessage<CurrentSpeed, CurrentSpeed.Builder> {
-    private CurrentSpeed() { }
-    private static readonly CurrentSpeed defaultInstance = new CurrentSpeed().MakeReadOnly();
-    private static readonly string[] _currentSpeedFieldNames = new string[] { "address", "m1Speed", "m2Speed" };
-    private static readonly uint[] _currentSpeedFieldTags = new uint[] { 8, 16, 24 };
-    public static CurrentSpeed DefaultInstance {
-      get { return defaultInstance; }
-    }
-    
-    public override CurrentSpeed DefaultInstanceForType {
-      get { return DefaultInstance; }
-    }
-    
-    protected override CurrentSpeed ThisMessage {
-      get { return this; }
-    }
-    
-    public static pbd::MessageDescriptor Descriptor {
-      get { return global::amber.roboclaw_proto.Roboclaw.internal__static_amber_roboclaw_proto_CurrentSpeed__Descriptor; }
-    }
-    
-    protected override pb::FieldAccess.FieldAccessorTable<CurrentSpeed, CurrentSpeed.Builder> InternalFieldAccessors {
-      get { return global::amber.roboclaw_proto.Roboclaw.internal__static_amber_roboclaw_proto_CurrentSpeed__FieldAccessorTable; }
-    }
-    
-    public const int AddressFieldNumber = 1;
-    private bool hasAddress;
-    private uint address_;
-    public bool HasAddress {
-      get { return hasAddress; }
-    }
-    [global::System.CLSCompliant(false)]
-    public uint Address {
-      get { return address_; }
-    }
-    
-    public const int M1SpeedFieldNumber = 2;
-    private bool hasM1Speed;
-    private int m1Speed_;
-    public bool HasM1Speed {
-      get { return hasM1Speed; }
-    }
-    public int M1Speed {
-      get { return m1Speed_; }
-    }
-    
-    public const int M2SpeedFieldNumber = 3;
-    private bool hasM2Speed;
-    private int m2Speed_;
-    public bool HasM2Speed {
-      get { return hasM2Speed; }
-    }
-    public int M2Speed {
-      get { return m2Speed_; }
-    }
-    
-    public override bool IsInitialized {
-      get {
-        if (!hasAddress) return false;
-        return true;
-      }
-    }
-    
-    public override void WriteTo(pb::ICodedOutputStream output) {
-      int size = SerializedSize;
-      string[] field_names = _currentSpeedFieldNames;
-      if (hasAddress) {
-        output.WriteUInt32(1, field_names[0], Address);
-      }
-      if (hasM1Speed) {
-        output.WriteInt32(2, field_names[1], M1Speed);
-      }
-      if (hasM2Speed) {
-        output.WriteInt32(3, field_names[2], M2Speed);
-      }
-      UnknownFields.WriteTo(output);
-    }
-    
-    private int memoizedSerializedSize = -1;
-    public override int SerializedSize {
-      get {
-        int size = memoizedSerializedSize;
-        if (size != -1) return size;
-        
-        size = 0;
-        if (hasAddress) {
-          size += pb::CodedOutputStream.ComputeUInt32Size(1, Address);
-        }
-        if (hasM1Speed) {
-          size += pb::CodedOutputStream.ComputeInt32Size(2, M1Speed);
-        }
-        if (hasM2Speed) {
-          size += pb::CodedOutputStream.ComputeInt32Size(3, M2Speed);
-        }
-        size += UnknownFields.SerializedSize;
-        memoizedSerializedSize = size;
-        return size;
-      }
-    }
-    
-    public static CurrentSpeed ParseFrom(pb::ByteString data) {
-      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
-    }
-    public static CurrentSpeed ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
-      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
-    }
-    public static CurrentSpeed ParseFrom(byte[] data) {
-      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
-    }
-    public static CurrentSpeed ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
-      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
-    }
-    public static CurrentSpeed ParseFrom(global::System.IO.Stream input) {
-      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
-    }
-    public static CurrentSpeed ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
-      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
-    }
-    public static CurrentSpeed ParseDelimitedFrom(global::System.IO.Stream input) {
-      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
-    }
-    public static CurrentSpeed ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
-      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
-    }
-    public static CurrentSpeed ParseFrom(pb::ICodedInputStream input) {
-      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
-    }
-    public static CurrentSpeed ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
-      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
-    }
-    private CurrentSpeed MakeReadOnly() {
-      return this;
-    }
-    
-    public static Builder CreateBuilder() { return new Builder(); }
-    public override Builder ToBuilder() { return CreateBuilder(this); }
-    public override Builder CreateBuilderForType() { return new Builder(); }
-    public static Builder CreateBuilder(CurrentSpeed prototype) {
-      return new Builder(prototype);
-    }
-    
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    public sealed partial class Builder : pb::GeneratedBuilder<CurrentSpeed, Builder> {
-      protected override Builder ThisBuilder {
-        get { return this; }
-      }
-      public Builder() {
-        result = DefaultInstance;
-        resultIsReadOnly = true;
-      }
-      internal Builder(CurrentSpeed cloneFrom) {
-        result = cloneFrom;
-        resultIsReadOnly = true;
-      }
-      
-      private bool resultIsReadOnly;
-      private CurrentSpeed result;
-      
-      private CurrentSpeed PrepareBuilder() {
-        if (resultIsReadOnly) {
-          CurrentSpeed original = result;
-          result = new CurrentSpeed();
-          resultIsReadOnly = false;
-          MergeFrom(original);
-        }
-        return result;
-      }
-      
-      public override bool IsInitialized {
-        get { return result.IsInitialized; }
-      }
-      
-      protected override CurrentSpeed MessageBeingBuilt {
-        get { return PrepareBuilder(); }
-      }
-      
-      public override Builder Clear() {
-        result = DefaultInstance;
-        resultIsReadOnly = true;
-        return this;
-      }
-      
-      public override Builder Clone() {
-        if (resultIsReadOnly) {
-          return new Builder(result);
-        } else {
-          return new Builder().MergeFrom(result);
-        }
-      }
-      
-      public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::amber.roboclaw_proto.CurrentSpeed.Descriptor; }
-      }
-      
-      public override CurrentSpeed DefaultInstanceForType {
-        get { return global::amber.roboclaw_proto.CurrentSpeed.DefaultInstance; }
-      }
-      
-      public override CurrentSpeed BuildPartial() {
-        if (resultIsReadOnly) {
-          return result;
-        }
-        resultIsReadOnly = true;
-        return result.MakeReadOnly();
-      }
-      
-      public override Builder MergeFrom(pb::IMessage other) {
-        if (other is CurrentSpeed) {
-          return MergeFrom((CurrentSpeed) other);
-        } else {
-          base.MergeFrom(other);
-          return this;
-        }
-      }
-      
-      public override Builder MergeFrom(CurrentSpeed other) {
-        if (other == global::amber.roboclaw_proto.CurrentSpeed.DefaultInstance) return this;
-        PrepareBuilder();
-        if (other.HasAddress) {
-          Address = other.Address;
-        }
-        if (other.HasM1Speed) {
-          M1Speed = other.M1Speed;
-        }
-        if (other.HasM2Speed) {
-          M2Speed = other.M2Speed;
-        }
-        this.MergeUnknownFields(other.UnknownFields);
-        return this;
-      }
-      
-      public override Builder MergeFrom(pb::ICodedInputStream input) {
-        return MergeFrom(input, pb::ExtensionRegistry.Empty);
-      }
-      
-      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
-        PrepareBuilder();
-        pb::UnknownFieldSet.Builder unknownFields = null;
-        uint tag;
-        string field_name;
-        while (input.ReadTag(out tag, out field_name)) {
-          if(tag == 0 && field_name != null) {
-            int field_ordinal = global::System.Array.BinarySearch(_currentSpeedFieldNames, field_name, global::System.StringComparer.Ordinal);
-            if(field_ordinal >= 0)
-              tag = _currentSpeedFieldTags[field_ordinal];
-            else {
-              if (unknownFields == null) {
-                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
-              }
-              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
-              continue;
-            }
-          }
-          switch (tag) {
-            case 0: {
-              throw pb::InvalidProtocolBufferException.InvalidTag();
-            }
-            default: {
-              if (pb::WireFormat.IsEndGroupTag(tag)) {
-                if (unknownFields != null) {
-                  this.UnknownFields = unknownFields.Build();
-                }
-                return this;
-              }
-              if (unknownFields == null) {
-                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
-              }
-              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
-              break;
-            }
-            case 8: {
-              result.hasAddress = input.ReadUInt32(ref result.address_);
-              break;
-            }
-            case 16: {
-              result.hasM1Speed = input.ReadInt32(ref result.m1Speed_);
-              break;
-            }
-            case 24: {
-              result.hasM2Speed = input.ReadInt32(ref result.m2Speed_);
-              break;
-            }
-          }
-        }
-        
-        if (unknownFields != null) {
-          this.UnknownFields = unknownFields.Build();
-        }
-        return this;
-      }
-      
-      
-      public bool HasAddress {
-        get { return result.hasAddress; }
-      }
-      [global::System.CLSCompliant(false)]
-      public uint Address {
-        get { return result.Address; }
-        set { SetAddress(value); }
-      }
-      [global::System.CLSCompliant(false)]
-      public Builder SetAddress(uint value) {
-        PrepareBuilder();
-        result.hasAddress = true;
-        result.address_ = value;
-        return this;
-      }
-      public Builder ClearAddress() {
-        PrepareBuilder();
-        result.hasAddress = false;
-        result.address_ = 0;
-        return this;
-      }
-      
-      public bool HasM1Speed {
-        get { return result.hasM1Speed; }
-      }
-      public int M1Speed {
-        get { return result.M1Speed; }
-        set { SetM1Speed(value); }
-      }
-      public Builder SetM1Speed(int value) {
-        PrepareBuilder();
-        result.hasM1Speed = true;
-        result.m1Speed_ = value;
-        return this;
-      }
-      public Builder ClearM1Speed() {
-        PrepareBuilder();
-        result.hasM1Speed = false;
-        result.m1Speed_ = 0;
-        return this;
-      }
-      
-      public bool HasM2Speed {
-        get { return result.hasM2Speed; }
-      }
-      public int M2Speed {
-        get { return result.M2Speed; }
-        set { SetM2Speed(value); }
-      }
-      public Builder SetM2Speed(int value) {
-        PrepareBuilder();
-        result.hasM2Speed = true;
-        result.m2Speed_ = value;
-        return this;
-      }
-      public Builder ClearM2Speed() {
-        PrepareBuilder();
-        result.hasM2Speed = false;
-        result.m2Speed_ = 0;
-        return this;
-      }
-    }
-    static CurrentSpeed() {
-      object.ReferenceEquals(global::amber.roboclaw_proto.Roboclaw.Descriptor, null);
+    static MotorsSpeed() {
+      object.ReferenceEquals(global::Amber.Protos.Roboclaw.Descriptor, null);
     }
   }
   
