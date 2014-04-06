@@ -47,12 +47,15 @@
   <ItemGroup>
     <Compile Include="Amber\AmberClient.cs" />
     <Compile Include="Amber\AmberConnectionException.cs" />
+    <Compile Include="Amber\AxesData.cs" />
     <Compile Include="Amber\ConnectionHandler.cs" />
+    <Compile Include="Amber\NinedofOutcome.cs" />
     <Compile Include="Amber\Outcome.cs" />
     <Compile Include="Amber\SpeedOutcome.cs" />
     <Compile Include="Amber\IAmberListener.cs" />
     <Compile Include="Amber\AmberProxy.cs" />
     <Compile Include="Amber\MessageHandler.cs" />
+    <Compile Include="Drivers\NinedofProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="proto\AmberProto.cs" />
     <Compile Include="proto\Ninedof.cs" />
@@ -61,8 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="protos\drivermsg.proto" />
     <None Include="protos\google\protobuf\csharp_options.proto" />
     <None Include="protos\google\protobuf\descriptor.proto" />
+    <None Include="protos\ninedof.proto" />
+    <None Include="protos\roboclaw.proto" />
     <None Include="protos\tutorial\addressbook.proto" />
   </ItemGroup>
   <ItemGroup>
