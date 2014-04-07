@@ -13,7 +13,9 @@ namespace Amber_API.Drivers
     public class NinedofProxy : AmberProxy
     {
         private readonly ExtensionRegistry _extensionRegistry;
+        private IAmberListener<NinedofOutcome> _ninedofOutcomeListener;
         private readonly Dictionary<uint, NinedofOutcome> _awaitingOutcomes;
+        private readonly Object _listenerLock = new object();
 
         public NinedofProxy(AmberClient amberClient, int deviceID)
             : base((int) Drivers.DeviceType.Ninedof, deviceID, amberClient)
@@ -23,7 +25,31 @@ namespace Amber_API.Drivers
             _awaitingOutcomes = new Dictionary<uint, NinedofOutcome>();
             Ninedof.RegisterAllExtensions(_extensionRegistry);
         }
-        
+
+        public void RegisterNinedofOutcomeListener(uint freq, Boolean accel, Boolean gyro, Boolean magnet, IAmberListener<NinedofOutcome> listener)
+        {
+            DriverMsg driverMsg = buildSubscribeActionMsg(freq, accel, gyro, magnet);
+
+            lock (_listenerLock)
+            {
+                _ninedofOutcomeListener = listener;
+            }
+
+            AmberClient.SendMessage(BuildHeader(), driverMsg);
+        }
+
+        public void UnregisterNinedofOutcomeListener()
+        {
+            DriverMsg driverMsg = buildSubscribeActionMsg(0, false, false, false);
+
+            lock (this)
+            {
+                _ninedofOutcomeListener = null;
+            }
+
+            AmberClient.SendMessage(BuildHeader(), driverMsg);
+        }
+
         public NinedofOutcome GetAxesData(Boolean accel, Boolean gyro, Boolean magnet)
         {            
             Debug.WriteLine("Pulling Ninedof data.");
@@ -39,8 +65,23 @@ namespace Amber_API.Drivers
         public override void HandleDataMsg(DriverHdr header, DriverMsg message)
         {
             var ackNum = message.AckNum;
-            if (message.HasAckNum && ackNum != 0)
+            if (!message.HasAckNum || ackNum == 0)
             {
+                var outcome = new NinedofOutcome();
+                SensorData sensorData = message.GetExtension(Ninedof.SensorData);
+
+                FillStructure(outcome, sensorData);
+
+                outcome.Available = true;
+
+                lock (_listenerLock)
+                {
+                    if (_ninedofOutcomeListener != null)
+                    {
+                        _ninedofOutcomeListener.Handle(outcome);
+                    }
+                }
+            } else {
                 if (_awaitingOutcomes.ContainsKey(ackNum))
                 {
                     NinedofOutcome outcome = _awaitingOutcomes[ackNum];
@@ -57,6 +98,22 @@ namespace Amber_API.Drivers
         public override ExtensionRegistry GetExtensionRegistry()
         {
             return _extensionRegistry;
+        }
+
+        private DriverMsg buildSubscribeActionMsg(uint freq, bool accel, bool gyro, bool magnet)
+        {
+            SubscribeAction.Builder subscribeActionBuilder = SubscribeAction.CreateBuilder();
+
+            subscribeActionBuilder.Freq = freq;
+            subscribeActionBuilder.Accel = accel;            
+            subscribeActionBuilder.Gyro = gyro;
+            subscribeActionBuilder.Magnet = magnet;
+
+            DriverMsg.Builder driverMsgBuilder = DriverMsg.CreateBuilder();
+            driverMsgBuilder.Type = DriverMsg.Types.MsgType.DATA;
+            driverMsgBuilder.SetExtension(Ninedof.SubscribeAction, subscribeActionBuilder.Build());
+
+            return driverMsgBuilder.Build();
         }
 
         private static DriverMsg BuildDataRequestMsg(bool accel, bool gyro, bool magnet)
