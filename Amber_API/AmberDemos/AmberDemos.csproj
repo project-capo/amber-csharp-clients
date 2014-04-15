@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A4893B95-56FC-4587-B675-57D64914BC4A}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{EE0696C2-D85B-40A3-BCA3-26425600E20D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Amber_API</RootNamespace>
-    <AssemblyName>Amber_API</AssemblyName>
+    <RootNamespace>AmberDemos</RootNamespace>
+    <AssemblyName>AmberDemos</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,12 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Google.ProtocolBuffers">
-      <HintPath>..\..\..\tools\Google.ProtocolBuffers.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.ProtocolBuffers.Serialization">
-      <HintPath>..\..\..\tools\Google.ProtocolBuffers.Serialization.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,38 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Amber\AmberClient.cs" />
-    <Compile Include="Amber\AmberConnectionException.cs" />
-    <Compile Include="Amber\AxesData.cs" />
-    <Compile Include="Amber\ConnectionHandler.cs" />
-    <Compile Include="Amber\NinedofDataListener.cs" />
-    <Compile Include="Amber\NinedofOutcome.cs" />
-    <Compile Include="Amber\Outcome.cs" />
-    <Compile Include="Amber\SpeedOutcome.cs" />
-    <Compile Include="Amber\IAmberListener.cs" />
-    <Compile Include="Amber\AmberProxy.cs" />
-    <Compile Include="Amber\MessageHandler.cs" />
-    <Compile Include="Drivers\NinedofProxy.cs" />
+    <Compile Include="Demos\DemoRunner.cs" />
+    <Compile Include="Demos\NinedofDemo.cs" />
+    <Compile Include="Demos\RoboclawDemo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="proto\AmberProto.cs" />
-    <Compile Include="proto\Ninedof.cs" />
-    <Compile Include="proto\Roboclaw.cs" />
-    <Compile Include="Drivers\RoboclawProxy.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="protos\drivermsg.proto" />
-    <None Include="protos\google\protobuf\csharp_options.proto" />
-    <None Include="protos\google\protobuf\descriptor.proto" />
-    <None Include="protos\ninedof.proto" />
-    <None Include="protos\roboclaw.proto" />
-    <None Include="protos\tutorial\addressbook.proto" />
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="licenses\license.txt" />
-    <Content Include="licenses\protoc-license.txt" />
+    <ProjectReference Include="..\Amber_API\Amber_API.csproj">
+      <Project>{a4893b95-56fc-4587-b675-57d64914bc4a}</Project>
+      <Name>Amber_API</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
