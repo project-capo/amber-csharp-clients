@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amber_API", "Amber_API\Amber_API.csproj", "{A4893B95-56FC-4587-B675-57D64914BC4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmberDemos", "AmberDemos\AmberDemos.csproj", "{EE0696C2-D85B-40A3-BCA3-26425600E20D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{A4893B95-56FC-4587-B675-57D64914BC4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4893B95-56FC-4587-B675-57D64914BC4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4893B95-56FC-4587-B675-57D64914BC4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE0696C2-D85B-40A3-BCA3-26425600E20D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE0696C2-D85B-40A3-BCA3-26425600E20D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE0696C2-D85B-40A3-BCA3-26425600E20D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE0696C2-D85B-40A3-BCA3-26425600E20D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

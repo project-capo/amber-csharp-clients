@@ -49,6 +49,7 @@
     <Compile Include="Amber\AmberConnectionException.cs" />
     <Compile Include="Amber\AxesData.cs" />
     <Compile Include="Amber\ConnectionHandler.cs" />
+    <Compile Include="Amber\NinedofDataListener.cs" />
     <Compile Include="Amber\NinedofOutcome.cs" />
     <Compile Include="Amber\Outcome.cs" />
     <Compile Include="Amber\SpeedOutcome.cs" />
