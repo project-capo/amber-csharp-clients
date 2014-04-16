@@ -9,8 +9,9 @@ namespace AmberDemos.Demos
     public class DemoRunner
     {
         public static void Main(string[] args)
-        {
-            new RoboclawDemo().RunDemo();
+        {   
+            //new RoboclawDemo().RunDemo();
+            new NinedofDemo().RunDemo();
         }
     }
 }

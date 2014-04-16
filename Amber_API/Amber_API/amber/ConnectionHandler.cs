@@ -20,22 +20,21 @@ namespace Amber_API.Amber
         public ConnectionHandler(string hostname, int port)
         {
             _port = port;
-            Socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IpAddress = IPAddress.Parse(hostname);
-            UdpClient = new UdpClient(0);
+            UdpClient = new UdpClient(port);
+            UdpClient.Client.ReceiveTimeout = 3000;
             SendEndPoint = new IPEndPoint(IpAddress, port);
             ReceiveEndPoint = new IPEndPoint(IPAddress.Any, port);
         }
 
         public void Send(byte[] bytes)
         {
-            Socket.SendTo(bytes, bytes.Length, SocketFlags.None, SendEndPoint);  
+            UdpClient.Send(bytes, bytes.Length, SendEndPoint);
+            //Socket.SendTo(bytes, bytes.Length, SocketFlags.None, SendEndPoint);  
         }
 
         public void Terminate()
         {
-            if (Socket != null)
-                Socket.Close();
         }
     }
 }
