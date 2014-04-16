@@ -31,13 +31,11 @@ namespace Amber_API.Amber
 
         public void WaitAvailable()
         {
-            lock (this)
+            while (!Available)
             {
-                while (Available)
-                {
-                    autoEvent.WaitOne();
-                }
+                autoEvent.WaitOne();
             }
+            
         }
     }
 }

@@ -33,9 +33,9 @@ namespace Amber_API.Amber
         private AmberClient(string hostname, int port)
         {
             InitializeConnection(hostname, port);
-            receivingThread = new Thread(Run);
             isActive = true;
-
+            receivingThread = new Thread(Run);
+            receivingThread.Start();
         }
 
         private void InitializeConnection(string hostname, int port)
@@ -73,8 +73,9 @@ namespace Amber_API.Amber
 		    }
 
             ConnectionHandler.Terminate();
-            receivingThread.Abort();
             isActive = false;
+            receivingThread.Abort();
+            
         }
 
         private void Run()
@@ -86,7 +87,7 @@ namespace Amber_API.Amber
         {
             byte[] packet = new byte[buffSize];            
             AmberProxy clientProxy = null;
-            while (true)
+            while (isActive)
             {
                 try
                 {
@@ -97,7 +98,7 @@ namespace Amber_API.Amber
                     int messageLen = (packet[2 + headerLen] << 8) | packet[2 + headerLen + 1];
                     ByteString messageByteString = ByteString.CopyFrom(packet, 2 + headerLen + 2, messageLen);
                
-                    if (!header.HasDeviceType || !header.HasDeviceID || header.DeviceID == 0)
+                    if (!header.HasDeviceType || !header.HasDeviceID || header.DeviceType == 0)
                     {
                         var message = DriverMsg.ParseFrom(messageByteString);
                         MessageHandler.HandleMessageFromMediator(header, message);
@@ -128,20 +129,28 @@ namespace Amber_API.Amber
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void SendMessage(DriverHdr header, DriverMsg message)
         {
+            //var k = header.ToString();
             MemoryStream memoryStream = new MemoryStream();
 
             int length;            
             
 
             length = header.SerializedSize;
-            byte[] lengthHeaderBytes = BitConverter.GetBytes(length);
+            byte[] lengthHeaderBytes = new byte[2];
+            lengthHeaderBytes[0] = (byte) (length >> 8);
+            lengthHeaderBytes[1] = (byte) (length);
+            //BitConverter.GetBytes(length);
             memoryStream.Write(lengthHeaderBytes, 0, lengthHeaderBytes.Length);
 
             byte[] headerBytes = header.ToByteArray();
             memoryStream.Write(headerBytes, 0, headerBytes.Length);
 
+            var g = memoryStream.ToArray();
+
             length = message.SerializedSize;
-            byte[] lengthMessageBytes = BitConverter.GetBytes(length);
+            byte[] lengthMessageBytes = new byte[2];
+            lengthMessageBytes[0] = (byte)(length >> 8);
+            lengthMessageBytes[1] = (byte)(length);
             memoryStream.Write(lengthMessageBytes, 0, lengthMessageBytes.Length);
 
             byte[] messageBytes = message.ToByteArray();
