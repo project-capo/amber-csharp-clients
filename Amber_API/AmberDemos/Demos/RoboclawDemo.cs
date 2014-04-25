@@ -13,18 +13,29 @@ namespace AmberDemos.Demos
     {
         public void RunDemo()
         {
-            AmberClient client = AmberClient.Create("192.168.1.50", 26233);
+            AmberClient client = AmberClient.Create("192.168.2.205", 26233);
+            try
+            {
+                var roboclawProxy = new RoboclawProxy(client, 0);
 
-            var roboclawProxy = new RoboclawProxy(client, 0);
+                int speed = 1000;
 
-            int speed = 1000;
+                roboclawProxy.SetSpeed(speed, speed, speed, speed);
 
-            roboclawProxy.SetSpeed(speed, speed, speed, speed);
-            var speedOutcome = roboclawProxy.GetSpeed();
-            speedOutcome.WaitAvailable();
+                System.Threading.Thread.Sleep(1000);
+                var speedOutcome = roboclawProxy.GetSpeed();
+                speedOutcome.WaitAvailable();
 
-            Console.WriteLine("Motors current speed: fl: {0}, fr: {1}, rl: {2}, rr: {3}",
-                speedOutcome.FrontLeftSpeed, speedOutcome.FrontRightSpeed, speedOutcome.RearLeftSpeed, speedOutcome.RearRightSpeed);
+                Console.WriteLine("Motors current speed: fl: {0}, fr: {1}, rl: {2}, rr: {3}",
+                    speedOutcome.FrontLeftSpeed, speedOutcome.FrontRightSpeed, speedOutcome.RearLeftSpeed,
+                    speedOutcome.RearRightSpeed);
+            }
+
+            finally
+            {
+                client.Terminate();
+            }
+            
         }
     }
 }

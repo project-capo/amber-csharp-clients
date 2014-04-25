@@ -49,6 +49,9 @@ namespace Amber_API.Amber
             DriverHdr.Builder driverHdrBuilder = DriverHdr.CreateBuilder();
             driverHdrBuilder.SetDeviceType(DeviceType);
             driverHdrBuilder.SetDeviceID(DeviceId);
+            //driverHdrBuilder
+            //driverHdrBuilder.SetDeviceType(DeviceType);
+            //driverHdrBuilder.SetDeviceID(DeviceId);
 
             return driverHdrBuilder.Build();
         }

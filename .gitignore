@@ -2,5 +2,6 @@ obj
 [Dd]ebug\*
 [Bb]in\*
 Amber_API/Amber_API/bin/*
+Amber_API/AmberDemos/bin/*
 LeapMotionPandaSteering/LeapMotionPandaSteering/bin/*
 LeapMotionPandaSteering/LeapMotionPandaSteering/obj/*
