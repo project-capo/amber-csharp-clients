@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Amber_API">
+      <HintPath>..\Amber_API.dll</HintPath>
+    </Reference>
     <Reference Include="LeapCSharp.NET4.0">
       <HintPath>libs\LeapCSharp.NET4.0.dll</HintPath>
     </Reference>
@@ -45,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\FrameState.cs" />
+    <Compile Include="Common\MotionInterpreter.cs" />
     <Compile Include="Listeners\RoboclawListener.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

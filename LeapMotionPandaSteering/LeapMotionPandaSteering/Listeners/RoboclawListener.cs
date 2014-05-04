@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Leap;
 using LeapMotionPandaSteering.Common;
+using Amber_API.Amber;
+using Amber_API.Drivers;
 
 public delegate void HandAppearDelegate();
 public delegate void HandDisappearDelegate();
@@ -15,11 +17,17 @@ namespace LeapMotionPandaSteering.Listeners
     {
         private Object thisLock = new Object();
         private FrameState previousFrameState;
+        private Vector zeroVector;
+
+        public RoboclawProxy Proxy { get; private set; } 
 
         public HandAppearDelegate OnOneHandAppear;
         public HandDisappearDelegate OnHandDisappear;
-        
 
+        public RoboclawListener(RoboclawProxy proxy)
+        {
+            this.Proxy = proxy;
+        }
 
         private void SafeWriteLine(String line)
         {
@@ -58,7 +66,7 @@ namespace LeapMotionPandaSteering.Listeners
         {
             Frame frame = controller.Frame();
                         
-            ControlHandEvents(frame.Hands.Count);
+            ControlHandEvents(frame);
             SetPreviousFrameState(frame.Hands.Count);            
         }
 
@@ -72,31 +80,41 @@ namespace LeapMotionPandaSteering.Listeners
             OnOneHandAppear += listener;
         }
 
-        private void ControlHandEvents(int handsCount)
+        private void ControlHandEvents(Frame frame)
         {
-            if (previousFrameState.HandsCount == 0 && handsCount > previousFrameState.HandsCount && handsCount == 1)
+            if (frame.Hands.Count == 1 && frame.Fingers.Count == 0)
             {
-                SafeWriteLine("Tu 1 rąsia");
-                if (OnOneHandAppear != null)
+                SafeWriteLine("Zero vector reset");
+                zeroVector = null;
+                MotionInterpreter.Stop(Proxy);
+            }
+
+            if (frame.Hands.Count == 1 && frame.Fingers.Count > 0)
+            {
+                if (zeroVector == null && frame.IsValid)
                 {
-                    OnOneHandAppear();
+                    zeroVector = frame.Hands[0].PalmPosition;
+                    return;
                 }
-            }
-            else if (previousFrameState.HandsCount == 1 && handsCount > previousFrameState.HandsCount)
-            {
-               SafeWriteLine("Tu 2 rąsia"); 
-            }
-            else if (previousFrameState.HandsCount == 2 && handsCount < previousFrameState.HandsCount && handsCount == 1)
-            {
-               SafeWriteLine("Jedna rąsia żegna"); 
-            }
-            else if (handsCount < previousFrameState.HandsCount && handsCount == 0)
-            {
-                SafeWriteLine("Nie ma rąk");
-                if (OnHandDisappear != null)
+
+                //anti-flood
+                if(frame.Id % 10 != 0)
+                    return;
+
+                var palm = frame.Hands[0].PalmPosition;
+                if (MotionInterpreter.ComputeRoboclawSpeed(Proxy, palm, zeroVector) == false)
                 {
-                    OnHandDisappear();
+                    SafeWriteLine("Could not set roboclaw speed");
+                    return;
                 }
+
+            }
+
+            if (frame.Hands.Count == 0 && zeroVector != null)
+            {
+                SafeWriteLine("Zero vector reset");
+                zeroVector = null;
+                MotionInterpreter.Stop(Proxy);
             }
         }
     }
