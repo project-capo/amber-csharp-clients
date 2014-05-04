@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Leap;
 using LeapMotionPandaSteering.Listeners;
+using Amber_API.Drivers;
+using Amber_API.Amber;
 
 namespace LeapMotionPandaSteering
 {
@@ -12,16 +14,33 @@ namespace LeapMotionPandaSteering
     {
         static void Main(string[] args)
         {
-            var listener = new RoboclawListener();
-            var controller = new Controller();
-            listener.RegisterOnOneHandAppearListener(OnHandAppear);
+            AmberClient client = AmberClient.Create("192.168.2.205", 26233);
+            try
+            {
+                var roboclawProxy = new RoboclawProxy(client, 0);
 
-            controller.AddListener(listener);
+                //int speed = 1000;
 
-            Console.ReadLine();
+                //roboclawProxy.SetSpeed(speed, speed, speed, speed);
 
-            controller.RemoveListener(listener);
-            controller.Dispose();
+                var listener = new RoboclawListener(roboclawProxy);
+                var controller = new Controller();
+                listener.RegisterOnOneHandAppearListener(OnHandAppear);
+
+                controller.AddListener(listener);
+
+                Console.ReadLine();
+
+                controller.RemoveListener(listener);
+                controller.Dispose();
+            }
+
+            finally
+            {
+                client.Terminate();
+            }
+
+           
         }
 
         private static void OnHandAppear()
