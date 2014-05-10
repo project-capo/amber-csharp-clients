@@ -29,6 +29,8 @@ namespace LeapMotionPandaSteering.Listeners
             this.Proxy = proxy;
         }
 
+        public RoboclawListener() { }
+
         private void SafeWriteLine(String line)
         {
             lock (thisLock)
@@ -66,30 +68,19 @@ namespace LeapMotionPandaSteering.Listeners
         {
             Frame frame = controller.Frame();
                         
-            ControlHandEvents(frame);
-            SetPreviousFrameState(frame.Hands.Count);            
-        }
-
-        private void SetPreviousFrameState(int handsCount)
-        {
-            previousFrameState.HandsCount = handsCount;
-        }
-
-        public void RegisterOnOneHandAppearListener(HandAppearDelegate listener)
-        {
-            OnOneHandAppear += listener;
+            ControlHandEvents(frame);         
         }
 
         private void ControlHandEvents(Frame frame)
         {
-            if (frame.Hands.Count == 1 && frame.Fingers.Count == 0)
+            if (frame.Hands.Count == 1 && frame.Fingers.Count == 0 && zeroVector != null)
             {
-                SafeWriteLine("Zero vector reset");
+                SafeWriteLine("Zero vector reset1");
                 zeroVector = null;
-                MotionInterpreter.Stop(Proxy);
-            }
+                //MotionInterpreter.Stop(Proxy);
+            } 
 
-            if (frame.Hands.Count == 1 && frame.Fingers.Count > 0)
+            if (frame.Hands.Count == 1 && frame.Fingers.Count > 0 && frame.Id % 3 == 0)
             {
                 if (zeroVector == null && frame.IsValid)
                 {
@@ -98,7 +89,7 @@ namespace LeapMotionPandaSteering.Listeners
                 }
 
                 //anti-flood
-                if(frame.Id % 10 != 0)
+                if(frame.Id % 9 != 0)
                     return;
 
                 var palm = frame.Hands[0].PalmPosition;
@@ -112,9 +103,9 @@ namespace LeapMotionPandaSteering.Listeners
 
             if (frame.Hands.Count == 0 && zeroVector != null)
             {
-                SafeWriteLine("Zero vector reset");
+                SafeWriteLine("Zero vector reset2");
                 zeroVector = null;
-                MotionInterpreter.Stop(Proxy);
+                //MotionInterpreter.Stop(Proxy);
             }
         }
     }

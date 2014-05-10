@@ -24,12 +24,13 @@ namespace LeapMotionPandaSteering
                 //roboclawProxy.SetSpeed(speed, speed, speed, speed);
 
                 var listener = new RoboclawListener(roboclawProxy);
+
                 var controller = new Controller();
-                listener.RegisterOnOneHandAppearListener(OnHandAppear);
+                //listener.RegisterOnOneHandAppearListener(OnHandAppear);
 
                 controller.AddListener(listener);
 
-                Console.ReadLine();
+                Console.ReadKey();
 
                 controller.RemoveListener(listener);
                 controller.Dispose();
@@ -42,11 +43,11 @@ namespace LeapMotionPandaSteering
 
            
         }
-
+        /*
         private static void OnHandAppear()
         {
             Console.WriteLine("Tu handler");
-        }
+        }*/
     }
 
  
