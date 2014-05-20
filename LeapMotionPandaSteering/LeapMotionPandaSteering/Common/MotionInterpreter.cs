@@ -19,10 +19,10 @@ namespace LeapMotionPandaSteering.Common
             var baseTurningSpeed = (MaxSpeed * (int)diffrentialPosition.x) / MaxAmplitude;
             var forwardingSpeed = (MaxSpeed * (int)diffrentialPosition.z) / MaxAmplitude;
 
-            var fl = MotionInterpreter.ComputeFrontLeftSpeed(baseTurningSpeed, forwardingSpeed);
-            var rl = MotionInterpreter.ComputeRearLeftSpeed(baseTurningSpeed, forwardingSpeed);
-            var fr = MotionInterpreter.ComputeFrontRightSpeed(baseTurningSpeed, forwardingSpeed);
-            var rr = MotionInterpreter.ComputeRearRightSpeed(baseTurningSpeed, forwardingSpeed);
+            var fl = ComputeFrontLeftSpeed(baseTurningSpeed, forwardingSpeed);
+            var rl = ComputeRearLeftSpeed(baseTurningSpeed, forwardingSpeed);
+            var fr = ComputeFrontRightSpeed(baseTurningSpeed, forwardingSpeed);
+            var rr = ComputeRearRightSpeed(baseTurningSpeed, forwardingSpeed);
 
             try
             {
