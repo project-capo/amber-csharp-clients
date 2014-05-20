@@ -23,7 +23,8 @@ namespace LeapMotionPandaSteering
 
                 //roboclawProxy.SetSpeed(speed, speed, speed, speed);
 
-                var listener = new RoboclawListener(roboclawProxy);
+//                var listener = new RoboclawListener(roboclawProxy);
+                var listener = new TwoHandsSteeringListener(roboclawProxy);
 
                 var controller = new Controller();
                 //listener.RegisterOnOneHandAppearListener(OnHandAppear);

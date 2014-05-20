@@ -52,7 +52,9 @@
   <ItemGroup>
     <Compile Include="Common\FrameState.cs" />
     <Compile Include="Common\MotionInterpreter.cs" />
+    <Compile Include="Common\TwoHandsMotionInterpreter.cs" />
     <Compile Include="Listeners\RoboclawListener.cs" />
+    <Compile Include="Listeners\TwoHandsSteeringListener.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
