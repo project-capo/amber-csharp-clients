@@ -18,6 +18,7 @@ namespace LeapMotionPandaSteering.Listeners
         private Object thisLock = new Object();
         private FrameState previousFrameState;
         private Vector zeroVector;
+        private SwipeGesture previousGesture;
 
         public RoboclawProxy Proxy { get; private set; } 
 
@@ -73,11 +74,33 @@ namespace LeapMotionPandaSteering.Listeners
 
         private void ControlHandEvents(Frame frame)
         {
+           /* if (frame.Gestures().Count > 0 && frame.Gestures().First().Type == Gesture.GestureType.TYPESWIPE)
+            {
+                SwipeGesture swipe = new SwipeGesture(frame.Gestures().First());
+                var speed = swipe.Speed;
+                if (previousGesture == null || DetermineDirection(swipe) != DetermineDirection(previousGesture) && speed > 3000)
+                {
+                    SafeWriteLine("Swipe Move detected. Direction: " + DetermineDirection(swipe) + ". Speed " + speed);
+                    MotionInterpreter.RunSwipeRoboclaw(Proxy, DetermineDirection(swipe));
+                    previousGesture = swipe;
+                }
+                return;
+            }*/
+            if (frame.Hands.Count == 0)
+            {
+                MotionInterpreter.Stop(Proxy);
+            }
+            if (frame.Hands.Count == 1 && frame.Fingers.Count == 0)
+            {
+                //SafeWriteLine("Zero vector reset1");
+                zeroVector = null;
+                MotionInterpreter.Stop(Proxy);
+            } 
             if (frame.Hands.Count == 1 && frame.Fingers.Count == 0 && zeroVector != null)
             {
-                SafeWriteLine("Zero vector reset1");
+                //SafeWriteLine("Zero vector reset1");
                 zeroVector = null;
-                //MotionInterpreter.Stop(Proxy);
+                MotionInterpreter.Stop(Proxy);
             } 
 
             if (frame.Hands.Count == 1 && frame.Fingers.Count > 0 && frame.Id % 3 == 0)
@@ -98,15 +121,33 @@ namespace LeapMotionPandaSteering.Listeners
                     SafeWriteLine("Could not set roboclaw speed");
                     return;
                 }
-
             }
 
             if (frame.Hands.Count == 0 && zeroVector != null)
             {
-                SafeWriteLine("Zero vector reset2");
+                //SafeWriteLine("Zero vector reset2");
                 zeroVector = null;
-                //MotionInterpreter.Stop(Proxy);
+                MotionInterpreter.Stop(Proxy);
             }
+            
         }
+        private Direction DetermineDirection(SwipeGesture gesture)
+        {
+            var direction = gesture.Direction;
+            if (gesture.Direction.x < 0 && Math.Abs(direction.x) > Math.Abs(direction.z))
+                return Direction.West;
+            if (gesture.Direction.x >= 0 && Math.Abs(direction.x) > Math.Abs(direction.z))
+                return Direction.East;
+            if (gesture.Direction.z < 0 && Math.Abs(direction.z) > Math.Abs(direction.x))
+                return Direction.North;
+            if (gesture.Direction.z >= 0 && Math.Abs(direction.z) > Math.Abs(direction.x))
+                return Direction.South;
+            return Direction.South;
+        }
+    }
+
+    public enum Direction
+    {
+        North, South, East, West, Up, Down
     }
 }
