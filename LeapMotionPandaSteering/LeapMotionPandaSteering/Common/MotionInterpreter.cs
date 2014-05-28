@@ -11,7 +11,7 @@ namespace LeapMotionPandaSteering.Common
 {
     public static class MotionInterpreter
     {
-        public static int MaxSpeed = 500;
+        public static int MaxSpeed = 1000;
         public static int MaxAmplitude = 300;
 
         public static bool ComputeRoboclawSpeed(RoboclawProxy proxy, Vector palmPosition, Vector zeroVector)

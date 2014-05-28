@@ -10,7 +10,7 @@ namespace LeapMotionPandaSteering.Common
 {
     public static class TwoHandsMotionInterpreter
     {
-        private static int maxSpeed = 500;
+        private static int maxSpeed = 1000;
         private static int maxAmplitude = 300;
 
         public static bool ComputeRoboclawSpeed(RoboclawProxy proxy, Vector currentLeftHandPosition,
@@ -45,14 +45,14 @@ namespace LeapMotionPandaSteering.Common
 
         private static int ComputeRightSpeed(int forwardingSpeed, int turningSpeed)
         {
-            return (forwardingSpeed > 0) ?
-                forwardingSpeed - turningSpeed : forwardingSpeed + turningSpeed;            
+            return (forwardingSpeed < 0) ?
+                -(forwardingSpeed + turningSpeed) : -(forwardingSpeed - turningSpeed);           
         }
 
         private static int ComputeLeftSpeed(int forwardingSpeed, int turningSpeed)
         {
-            return (forwardingSpeed > 0) ?
-                forwardingSpeed + turningSpeed : forwardingSpeed - turningSpeed;
+            return (forwardingSpeed < 0) ?
+                -(forwardingSpeed - turningSpeed) : -(forwardingSpeed + turningSpeed);
         }        
     }
 }

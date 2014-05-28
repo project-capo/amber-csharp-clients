@@ -14,7 +14,7 @@ namespace LeapMotionPandaSteering
     {
         static void Main(string[] args)
         {
-            AmberClient client = AmberClient.Create("192.168.2.205", 26233);
+            AmberClient client = AmberClient.Create("192.168.2.204", 26233);
             try
             {
                 var roboclawProxy = new RoboclawProxy(client, 0);
@@ -23,8 +23,8 @@ namespace LeapMotionPandaSteering
 
                 //roboclawProxy.SetSpeed(speed, speed, speed, speed);
 
-//                var listener = new RoboclawListener(roboclawProxy);
-                var listener = new TwoHandsSteeringListener(roboclawProxy);
+                var listener = new RoboclawListener(roboclawProxy);
+//                var listener = new TwoHandsSteeringListener(roboclawProxy);
 
                 var controller = new Controller();
                 //listener.RegisterOnOneHandAppearListener(OnHandAppear);
