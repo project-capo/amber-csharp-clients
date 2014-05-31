@@ -18,7 +18,6 @@ namespace LeapMotionPandaSteering.Listeners
         private Object thisLock = new Object();
         private FrameState previousFrameState;
         private Vector zeroVector;
-        private SwipeGesture previousGesture;
 
         public RoboclawProxy Proxy { get; private set; } 
 
@@ -49,10 +48,10 @@ namespace LeapMotionPandaSteering.Listeners
         public override void OnConnect(Controller controller)
         {
             SafeWriteLine("Connected");
-            controller.EnableGesture(Gesture.GestureType.TYPECIRCLE);
-            controller.EnableGesture(Gesture.GestureType.TYPEKEYTAP);
-            controller.EnableGesture(Gesture.GestureType.TYPESCREENTAP);
-            controller.EnableGesture(Gesture.GestureType.TYPESWIPE);
+            controller.EnableGesture(Gesture.GestureType.TYPE_CIRCLE);
+            controller.EnableGesture(Gesture.GestureType.TYPE_KEY_TAP);
+            controller.EnableGesture(Gesture.GestureType.TYPE_SCREEN_TAP);
+            controller.EnableGesture(Gesture.GestureType.TYPE_SWIPE);
         }
 
         public override void OnDisconnect(Controller controller)
@@ -74,18 +73,6 @@ namespace LeapMotionPandaSteering.Listeners
 
         private void ControlHandEvents(Frame frame)
         {
-           /* if (frame.Gestures().Count > 0 && frame.Gestures().First().Type == Gesture.GestureType.TYPESWIPE)
-            {
-                SwipeGesture swipe = new SwipeGesture(frame.Gestures().First());
-                var speed = swipe.Speed;
-                if (previousGesture == null || DetermineDirection(swipe) != DetermineDirection(previousGesture) && speed > 3000)
-                {
-                    SafeWriteLine("Swipe Move detected. Direction: " + DetermineDirection(swipe) + ". Speed " + speed);
-                    MotionInterpreter.RunSwipeRoboclaw(Proxy, DetermineDirection(swipe));
-                    previousGesture = swipe;
-                }
-                return;
-            }*/
             if (frame.Hands.Count == 0)
             {
                 MotionInterpreter.Stop(Proxy);

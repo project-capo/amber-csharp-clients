@@ -38,7 +38,8 @@
     <Reference Include="Amber_API">
       <HintPath>..\Amber_API.dll</HintPath>
     </Reference>
-    <Reference Include="LeapCSharp.NET4.0">
+    <Reference Include="LeapCSharp.NET4.0, Version=0.0.0.0, Culture=neutral, PublicKeyToken=6e1b1368e71eba9b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\LeapCSharp.NET4.0.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -52,7 +53,6 @@
   <ItemGroup>
     <Compile Include="Common\FrameState.cs" />
     <Compile Include="Common\MotionInterpreter.cs" />
-    <Compile Include="Common\TwoHandsMotionInterpreter.cs" />
     <Compile Include="Listeners\RoboclawListener.cs" />
     <Compile Include="Listeners\TwoHandsSteeringListener.cs" />
     <Compile Include="Program.cs" />
@@ -62,15 +62,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Leap.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LeapCSharp.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Leapd.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Leap.dll" />
+    <Content Include="LeapCSharp.dll" />
+    <Content Include="Leapd.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
