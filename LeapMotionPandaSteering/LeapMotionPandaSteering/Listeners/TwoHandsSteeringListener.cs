@@ -13,10 +13,8 @@ namespace LeapMotionPandaSteering.Listeners
     {
         private Object thisLock = new Object();
         private FrameState previousFrameState;
-        private Vector zeroVector;
         private Vector initialLeftHandPosition;
         private Vector initialRightHandPosition;
-        private SwipeGesture previousGesture;
 
         public RoboclawProxy Proxy { get; private set; } 
 
@@ -47,10 +45,10 @@ namespace LeapMotionPandaSteering.Listeners
         public override void OnConnect(Controller controller)
         {
             SafeWriteLine("Connected");
-            controller.EnableGesture(Gesture.GestureType.TYPECIRCLE);
-            controller.EnableGesture(Gesture.GestureType.TYPEKEYTAP);
-            controller.EnableGesture(Gesture.GestureType.TYPESCREENTAP);
-            controller.EnableGesture(Gesture.GestureType.TYPESWIPE);
+            controller.EnableGesture(Gesture.GestureType.TYPE_CIRCLE);
+            controller.EnableGesture(Gesture.GestureType.TYPE_KEY_TAP);
+            controller.EnableGesture(Gesture.GestureType.TYPE_SCREEN_TAP);
+            controller.EnableGesture(Gesture.GestureType.TYPE_SWIPE);
         }
 
         public override void OnDisconnect(Controller controller)
@@ -106,7 +104,7 @@ namespace LeapMotionPandaSteering.Listeners
                     left = frame.Hands[1].PalmPosition;
                 }
 
-                TwoHandsMotionInterpreter.ComputeRoboclawSpeed(Proxy, left,
+                MotionInterpreter.ComputeRoboclawSpeed(Proxy, left,
                     initialLeftHandPosition, right, initialRightHandPosition);
             }
             else if (frame.Hands.Count == 0)
@@ -114,12 +112,12 @@ namespace LeapMotionPandaSteering.Listeners
 //                SafeWriteLine("reset");
                 initialLeftHandPosition = null;
                 initialRightHandPosition = null;
-                TwoHandsMotionInterpreter.Stop(Proxy);
+                MotionInterpreter.Stop(Proxy);
             }
             else if(frame.Id % 3 == 0)
             {
 //                SafeWriteLine("stopping");
-                TwoHandsMotionInterpreter.Stop(Proxy);
+                MotionInterpreter.Stop(Proxy);
             }
             previousFrameState.HandsCount = frame.Hands.Count;
         }

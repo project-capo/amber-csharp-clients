@@ -13,28 +13,31 @@ namespace LeapMotionPandaSteering.Common
     {
         public static int MaxSpeed = 1000;
         public static int MaxAmplitude = 300;
+        public static int PeaceArea = 100;
 
-        public static bool ComputeRoboclawSpeed(RoboclawProxy proxy, Vector palmPosition, Vector zeroVector)
+        public static bool ComputeRoboclawSpeed(RoboclawProxy proxy, Vector palmPosition, Vector zeroVector, bool peaceAreaEnabled=true)
         {
             var diffrentialPosition = new Vector(palmPosition.x - zeroVector.x,palmPosition.y - zeroVector.y,zeroVector.z - palmPosition.z);
-            if(Math.Abs(diffrentialPosition.z) < 100 && Math.Abs(diffrentialPosition.x)<100){
+            if (peaceAreaEnabled && Math.Abs(diffrentialPosition.z) < PeaceArea && Math.Abs(diffrentialPosition.x) < PeaceArea)
+            {
                 return true;
             }
+
             int forwardingSpeed = 0;
             int baseTurningSpeed = 0;
             if(diffrentialPosition.x < 0)
-                baseTurningSpeed = (MaxSpeed * (int)diffrentialPosition.x+100) / MaxAmplitude;
+                baseTurningSpeed = (MaxSpeed * ((int)diffrentialPosition.x + PeaceArea)) / MaxAmplitude;
             else
-                baseTurningSpeed = (MaxSpeed * (int)diffrentialPosition.x - 100) / MaxAmplitude;
+                baseTurningSpeed = (MaxSpeed * ((int)diffrentialPosition.x - PeaceArea)) / MaxAmplitude;
             if(diffrentialPosition.z < 0)
-                forwardingSpeed = (MaxSpeed * ((int)diffrentialPosition.z+100)) / MaxAmplitude;
+                forwardingSpeed = (MaxSpeed * ((int)diffrentialPosition.z + PeaceArea)) / MaxAmplitude;
             else
-                forwardingSpeed = (MaxSpeed * ((int)diffrentialPosition.z-100)) / MaxAmplitude;
+                forwardingSpeed = (MaxSpeed * ((int)diffrentialPosition.z - PeaceArea)) / MaxAmplitude;
 
-            var fl = ComputeFrontLeftSpeed(baseTurningSpeed, forwardingSpeed);
-            var rl = ComputeRearLeftSpeed(baseTurningSpeed, forwardingSpeed);
-            var fr = ComputeFrontRightSpeed(baseTurningSpeed, forwardingSpeed);
-            var rr = ComputeRearRightSpeed(baseTurningSpeed, forwardingSpeed);
+            var fl = ComputeLeftSpeedOneHand(baseTurningSpeed, forwardingSpeed);
+            var rl = ComputeLeftSpeedOneHand(baseTurningSpeed, forwardingSpeed);
+            var fr = ComputeRightSpeedOneHand(baseTurningSpeed, forwardingSpeed);
+            var rr = ComputeRightSpeedOneHand(baseTurningSpeed, forwardingSpeed);
 
             try
             {
@@ -79,11 +82,8 @@ namespace LeapMotionPandaSteering.Common
             proxy.SetSpeed(0, 0, 0, 0);
         }
 
-        private static int ComputeRearLeftSpeed(int baseTurningSpeed, int forwardingSpeed)
+        private static int ComputeLeftSpeedOneHand(int baseTurningSpeed, int forwardingSpeed)
         {
-            //if (forwardingSpeed < 0)
-              //  return 0;
-
             if (baseTurningSpeed <= 0)
                 return forwardingSpeed;
 
@@ -92,11 +92,8 @@ namespace LeapMotionPandaSteering.Common
             return baseTurningSpeed + forwardingSpeed;
         }
 
-        private static int ComputeRearRightSpeed(int baseTurningSpeed, int forwardingSpeed)
+        private static int ComputeRightSpeedOneHand(int baseTurningSpeed, int forwardingSpeed)
         {
-            //if (forwardingSpeed < 0)
-              //  return 0;
-
             if (baseTurningSpeed > 0)
                 return forwardingSpeed;
 
@@ -105,33 +102,41 @@ namespace LeapMotionPandaSteering.Common
             return Math.Abs(baseTurningSpeed) + forwardingSpeed;
         }
 
-        private static int ComputeFrontLeftSpeed(int baseTurningSpeed, int forwardingSpeed)
+        public static bool ComputeRoboclawSpeed(RoboclawProxy proxy, Vector currentLeftHandPosition,
+            Vector initialLeftHandPosition, Vector currentRightHandPosition, Vector initialRightHandPosition)
         {
-            //if (forwardingSpeed < 0)
-              //  return 0;
+            var forwardingSpeed = MaxSpeed * ((int)currentRightHandPosition.z - (int)initialRightHandPosition.z) / MaxAmplitude;
+            var turningSpeed = MaxSpeed * ((int)currentLeftHandPosition.x - (int)initialLeftHandPosition.x) / MaxAmplitude;
+            var fl = ComputeLeftSpeedTwoHands(forwardingSpeed, turningSpeed);
+            var fr = ComputeRightSpeedTwoHands(forwardingSpeed, turningSpeed);
+            var rl = ComputeLeftSpeedTwoHands(forwardingSpeed, turningSpeed);
+            var rr = ComputeRightSpeedTwoHands(forwardingSpeed, turningSpeed);
 
-            if (baseTurningSpeed <= 0)
-                return forwardingSpeed;
+            try
+            {
+                proxy.SetSpeed(fl, fr, rl, rr);
+            }
 
-            if (forwardingSpeed < 0)
-                return -baseTurningSpeed + forwardingSpeed;
-            return baseTurningSpeed + forwardingSpeed;
+            catch (Exception e)
+            {
+                Console.WriteLine("Could not set roboclaw speed", e);
+                return false;
+            }
+
+            Console.WriteLine(fl + " " + fr + " " + rl + " " + rr);
+            return true;
         }
 
-        private static int ComputeFrontRightSpeed(int baseTurningSpeed, int forwardingSpeed)
+        private static int ComputeRightSpeedTwoHands(int forwardingSpeed, int turningSpeed)
         {
-            
-              //  return 0;
-
-            if (baseTurningSpeed > 0)
-                return forwardingSpeed;
-            if (forwardingSpeed < 0)
-                return baseTurningSpeed + forwardingSpeed;
-            return Math.Abs(baseTurningSpeed) + forwardingSpeed;
+            return (forwardingSpeed < 0) ?
+                -(forwardingSpeed + turningSpeed) : -(forwardingSpeed - turningSpeed);
         }
 
-
-
-
+        private static int ComputeLeftSpeedTwoHands(int forwardingSpeed, int turningSpeed)
+        {
+            return (forwardingSpeed < 0) ?
+                -(forwardingSpeed - turningSpeed) : -(forwardingSpeed + turningSpeed);
+        }
     }
 }
