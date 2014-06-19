@@ -62,6 +62,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Leap.dll" />
     <Content Include="LeapCSharp.dll" />
     <Content Include="Leapd.dll" />

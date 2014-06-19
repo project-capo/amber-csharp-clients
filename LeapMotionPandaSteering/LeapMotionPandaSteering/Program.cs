@@ -7,6 +7,8 @@ using Leap;
 using LeapMotionPandaSteering.Listeners;
 using Amber_API.Drivers;
 using Amber_API.Amber;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace LeapMotionPandaSteering
 {
@@ -14,22 +16,29 @@ namespace LeapMotionPandaSteering
     {
         static void Main(string[] args)
         {
-            AmberClient client = AmberClient.Create("192.168.2.204", 26233);
+            Settings settings = InitializeConfiguration("config.xml");
+            AmberClient client = AmberClient.Create(settings.ClientIP, settings.ClientPort);
             try
             {
                 var roboclawProxy = new RoboclawProxy(client, 0);
-
-                //int speed = 1000;
-
-                //roboclawProxy.SetSpeed(speed, speed, speed, speed);
-
-                var listener = new RoboclawListener(roboclawProxy);
-//                var listener = new TwoHandsSteeringListener(roboclawProxy);
-
                 var controller = new Controller();
-                //listener.RegisterOnOneHandAppearListener(OnHandAppear);
+                Listener listener;
 
-                controller.AddListener(listener);
+                switch (settings.SteeringModeHandsCount)
+                {
+                    case 1:
+                        listener = new RoboclawListener(roboclawProxy);
+                        controller.AddListener(listener);
+                        break;
+                    case 2:
+                        listener = new TwoHandsSteeringListener(roboclawProxy);
+                        controller.AddListener(listener);
+                        break;
+                    default:
+                        listener = new TwoHandsSteeringListener(roboclawProxy);
+                        controller.AddListener(listener);
+                        break;
+                }
 
                 Console.ReadKey();
 
@@ -41,15 +50,34 @@ namespace LeapMotionPandaSteering
             {
                 client.Terminate();
             }
-
            
         }
-        /*
-        private static void OnHandAppear()
+
+        private static Settings InitializeConfiguration(string path)
         {
-            Console.WriteLine("Tu handler");
-        }*/
+            LeapMotionPandaSteering.Common.MotionInterpreter.Initialize();
+            var serializer = new XmlSerializer(typeof(Settings));
+
+            using (var reader = new StreamReader(path))
+            {
+                return (Settings)serializer.Deserialize(reader);
+                
+            }
+        }
     }
 
+    [Serializable()]
+    [XmlRoot("Settings")]
+    public class Settings
+    {
+        [XmlElement]
+        public string ClientIP { get; set; }
+
+        [XmlElement]
+        public int ClientPort { get; set; }
+
+        [XmlElement]
+        public int SteeringModeHandsCount { get; set; }
+    }
  
 }

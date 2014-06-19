@@ -83,14 +83,8 @@ namespace LeapMotionPandaSteering.Listeners
                 zeroVector = null;
                 MotionInterpreter.Stop(Proxy);
             } 
-            if (frame.Hands.Count == 1 && frame.Fingers.Count == 0 && zeroVector != null)
-            {
-                //SafeWriteLine("Zero vector reset1");
-                zeroVector = null;
-                MotionInterpreter.Stop(Proxy);
-            } 
 
-            if (frame.Hands.Count == 1 && frame.Fingers.Count > 0 && frame.Id % 3 == 0)
+            if (frame.Hands.Count == 1 && frame.Fingers.Count > 0)
             {
                 if (zeroVector == null && frame.IsValid)
                 {
@@ -99,8 +93,8 @@ namespace LeapMotionPandaSteering.Listeners
                 }
 
                 //anti-flood
-                if(frame.Id % 9 != 0)
-                    return;
+                //if(frame.Id % 9 != 0)
+                //    return;
 
                 var palm = frame.Hands[0].PalmPosition;
                 if (MotionInterpreter.ComputeRoboclawSpeed(Proxy, palm, zeroVector) == false)
