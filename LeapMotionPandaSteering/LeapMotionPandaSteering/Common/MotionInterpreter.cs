@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Amber_API.Drivers;
 using Leap;
 using LeapMotionPandaSteering.Listeners;
+using System.Diagnostics;
 
 namespace LeapMotionPandaSteering.Common
 {
@@ -14,9 +15,20 @@ namespace LeapMotionPandaSteering.Common
         public static int MaxSpeed = 1000;
         public static int MaxAmplitude = 300;
         public static int PeaceArea = 100;
+        public static Stopwatch TimeSinceLastMessage;
+        public static int DelayMs = 100;
+
+        public static void Initialize()
+        {
+            TimeSinceLastMessage = new Stopwatch();
+            TimeSinceLastMessage.Start();
+        }
 
         public static bool ComputeRoboclawSpeed(RoboclawProxy proxy, Vector palmPosition, Vector zeroVector, bool peaceAreaEnabled=true)
         {
+            if (TimeSinceLastMessage.ElapsedMilliseconds < MotionInterpreter.DelayMs)
+                return true;
+
             var diffrentialPosition = new Vector(palmPosition.x - zeroVector.x,palmPosition.y - zeroVector.y,zeroVector.z - palmPosition.z);
             if (peaceAreaEnabled && Math.Abs(diffrentialPosition.z) < PeaceArea && Math.Abs(diffrentialPosition.x) < PeaceArea)
             {
@@ -42,6 +54,7 @@ namespace LeapMotionPandaSteering.Common
             try
             {
                 proxy.SetSpeed(fl, fr, rl, rr);
+                TimeSinceLastMessage.Restart();
             }
 
             catch (Exception e)
