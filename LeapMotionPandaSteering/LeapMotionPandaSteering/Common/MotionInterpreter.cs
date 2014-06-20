@@ -66,7 +66,7 @@ namespace LeapMotionPandaSteering.Common
             Console.WriteLine(fl + " " + fr + " " + rl + " " + rr);
             return true;
             
-        }
+        }       
 
         public static bool RunSwipeRoboclaw(RoboclawProxy proxy, Direction direction)
         {
@@ -140,6 +140,19 @@ namespace LeapMotionPandaSteering.Common
             return true;
         }
 
+        public static void Circle(RoboclawProxy proxy, int direction)
+        {
+            int circleSpeed = 200;
+            try
+            {
+                proxy.SetSpeed(circleSpeed*direction, circleSpeed*direction, -circleSpeed*direction, -circleSpeed*direction);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Could not set roboclaw speed", e);                
+            }
+        }
+
         private static int ComputeRightSpeedTwoHands(int forwardingSpeed, int turningSpeed)
         {
             return (forwardingSpeed < 0) ?
@@ -150,6 +163,6 @@ namespace LeapMotionPandaSteering.Common
         {
             return (forwardingSpeed < 0) ?
                 -(forwardingSpeed - turningSpeed) : -(forwardingSpeed + turningSpeed);
-        }
+        }        
     }
 }

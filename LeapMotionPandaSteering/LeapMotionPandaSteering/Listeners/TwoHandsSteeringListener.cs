@@ -107,6 +107,18 @@ namespace LeapMotionPandaSteering.Listeners
                 MotionInterpreter.ComputeRoboclawSpeed(Proxy, left,
                     initialLeftHandPosition, right, initialRightHandPosition);
             }
+            else if (frame.Hands.Count == 1 && frame.Gestures()[0].Type == Gesture.GestureType.TYPE_CIRCLE)
+            {
+                var circle = new CircleGesture(frame.Gestures()[0]);
+                if (circle.Pointable.Direction.AngleTo(circle.Normal) <= Math.PI/4)
+                {
+                    MotionInterpreter.Circle(Proxy, 1);
+                }
+                else
+                {
+                    MotionInterpreter.Circle(Proxy, -1);
+                }
+            }
             else if (frame.Hands.Count == 0)
             {
 //                SafeWriteLine("reset");
