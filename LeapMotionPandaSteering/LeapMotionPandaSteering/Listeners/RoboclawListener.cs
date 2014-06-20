@@ -73,6 +73,19 @@ namespace LeapMotionPandaSteering.Listeners
 
         private void ControlHandEvents(Frame frame)
         {
+            if (frame.Hands.Count == 2 && frame.Gestures()[0].Type == Gesture.GestureType.TYPE_CIRCLE)
+            {
+                var circle = new CircleGesture(frame.Gestures()[0]);
+                if (circle.Pointable.Direction.AngleTo(circle.Normal) <= Math.PI/4)
+                {
+                    MotionInterpreter.Circle(Proxy, 1);
+                }
+                else
+                {
+                    MotionInterpreter.Circle(Proxy, -1);
+                }
+            }
+
             if (frame.Hands.Count == 0)
             {
                 MotionInterpreter.Stop(Proxy);
