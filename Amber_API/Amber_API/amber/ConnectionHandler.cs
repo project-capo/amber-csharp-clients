@@ -21,8 +21,7 @@ namespace Amber_API.Amber
         {
             _port = port;
             IpAddress = IPAddress.Parse(hostname);
-            UdpClient = new UdpClient(port);
-            UdpClient.Client.ReceiveTimeout = 3000;
+            UdpClient = new UdpClient(port);            
             SendEndPoint = new IPEndPoint(IpAddress, port);
             ReceiveEndPoint = new IPEndPoint(IPAddress.Any, port);
         }

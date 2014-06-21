@@ -8,8 +8,6 @@ using LeapMotionPandaSteering.Common;
 using Amber_API.Amber;
 using Amber_API.Drivers;
 
-public delegate void HandAppearDelegate();
-public delegate void HandDisappearDelegate();
 
 namespace LeapMotionPandaSteering.Listeners
 {
@@ -20,9 +18,6 @@ namespace LeapMotionPandaSteering.Listeners
         private Vector zeroVector;
 
         public RoboclawProxy Proxy { get; private set; } 
-
-        public HandAppearDelegate OnOneHandAppear;
-        public HandDisappearDelegate OnHandDisappear;
 
         public RoboclawListener(RoboclawProxy proxy)
         {
@@ -90,24 +85,19 @@ namespace LeapMotionPandaSteering.Listeners
             {
                 MotionInterpreter.Stop(Proxy);
             }
-            if (frame.Hands.Count == 1 && frame.Fingers.Count == 0)
-            {
-                //SafeWriteLine("Zero vector reset1");
+            if (frame.Hands.Count == 1 && frame.Hands[0].GrabStrength == 1.0)
+            {                
                 zeroVector = null;
                 MotionInterpreter.Stop(Proxy);
-            } 
+            }
 
-            if (frame.Hands.Count == 1 && frame.Fingers.Count > 0)
+            if (frame.Hands.Count == 1 && frame.Hands[0].GrabStrength < 1.0)
             {
                 if (zeroVector == null && frame.IsValid)
                 {
                     zeroVector = frame.Hands[0].PalmPosition;
                     return;
                 }
-
-                //anti-flood
-                //if(frame.Id % 9 != 0)
-                //    return;
 
                 var palm = frame.Hands[0].PalmPosition;
                 if (MotionInterpreter.ComputeRoboclawSpeed(Proxy, palm, zeroVector) == false)
@@ -118,8 +108,7 @@ namespace LeapMotionPandaSteering.Listeners
             }
 
             if (frame.Hands.Count == 0 && zeroVector != null)
-            {
-                //SafeWriteLine("Zero vector reset2");
+            {                
                 zeroVector = null;
                 MotionInterpreter.Stop(Proxy);
             }

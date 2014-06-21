@@ -13,7 +13,7 @@ namespace AmberDemos.Demos
     {
         public void RunDemo()
         {
-            AmberClient client = AmberClient.Create("192.168.2.205", 26233);
+            AmberClient client = AmberClient.Create("192.168.2.204", 26233);
             try
             {
                 var roboclawProxy = new RoboclawProxy(client, 0);

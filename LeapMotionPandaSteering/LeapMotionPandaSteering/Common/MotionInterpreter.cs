@@ -16,7 +16,8 @@ namespace LeapMotionPandaSteering.Common
         public static int MaxAmplitude = 300;
         public static int PeaceArea = 100;
         public static Stopwatch TimeSinceLastMessage;
-        public static int DelayMs = 100;
+        public static int DelayMs = 50;
+        public static int CircleSpeed = 200;
 
         public static void Initialize()
         {
@@ -53,6 +54,7 @@ namespace LeapMotionPandaSteering.Common
 
             try
             {
+                Console.WriteLine("{0}, {1}, {2}, {3}", fl, fr, rl, rr);
                 proxy.SetSpeed(fl, fr, rl, rr);
                 TimeSinceLastMessage.Restart();
             }
@@ -62,8 +64,6 @@ namespace LeapMotionPandaSteering.Common
                 Console.WriteLine("Could not set roboclaw speed", e);
                 return false;
             }
-
-            Console.WriteLine(fl + " " + fr + " " + rl + " " + rr);
             return true;
             
         }       
@@ -136,16 +136,15 @@ namespace LeapMotionPandaSteering.Common
                 return false;
             }
 
-            Console.WriteLine(fl + " " + fr + " " + rl + " " + rr);
             return true;
         }
 
         public static void Circle(RoboclawProxy proxy, int direction)
         {
-            int circleSpeed = 200;
+            int circleSpeed = MotionInterpreter.CircleSpeed;
             try
             {
-                proxy.SetSpeed(circleSpeed*direction, circleSpeed*direction, -circleSpeed*direction, -circleSpeed*direction);
+                proxy.SetSpeed(circleSpeed*direction, -circleSpeed*direction, circleSpeed*direction, -circleSpeed*direction);
             }
             catch (Exception e)
             {
