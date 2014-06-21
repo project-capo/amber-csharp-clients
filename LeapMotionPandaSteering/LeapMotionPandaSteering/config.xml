@@ -2,4 +2,10 @@
   <ClientIP>192.168.2.204</ClientIP>
   <ClientPort>26233</ClientPort>
   <SteeringModeHandsCount>1</SteeringModeHandsCount>
+  <!--optionals-->
+  <Delay>100</Delay>
+  <MaxSpeed>1000</MaxSpeed>
+  <MaxAmplitude>300</MaxAmplitude>
+  <PeaceArea>100</PeaceArea>
+  <CircleSpeed>200</CircleSpeed>
 </Settings>

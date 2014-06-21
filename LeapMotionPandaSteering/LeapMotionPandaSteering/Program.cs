@@ -17,11 +17,16 @@ namespace LeapMotionPandaSteering
         static void Main(string[] args)
         {
             Settings settings = InitializeConfiguration("config.xml");
+            if (settings == null)
+                return;
+
+            SetMotionInterpreterParameters(settings);
             AmberClient client = AmberClient.Create(settings.ClientIP, settings.ClientPort);
             try
             {
                 var roboclawProxy = new RoboclawProxy(client, 0);
-                var controller = new Controller();
+                var controller = new Controller(); 
+                
                 Listener listener;
 
                 switch (settings.SteeringModeHandsCount)
@@ -53,15 +58,38 @@ namespace LeapMotionPandaSteering
            
         }
 
+        private static void SetMotionInterpreterParameters(Settings settings)
+        {
+            if(settings.Delay!=null)
+                LeapMotionPandaSteering.Common.MotionInterpreter.DelayMs = (int) settings.Delay;
+            if (settings.CircleSpeed != null)
+                LeapMotionPandaSteering.Common.MotionInterpreter.CircleSpeed = (int)settings.CircleSpeed;
+            if (settings.MaxAmplitude != null)
+                LeapMotionPandaSteering.Common.MotionInterpreter.MaxAmplitude = (int)settings.MaxAmplitude;
+            if (settings.MaxSpeed != null)
+                LeapMotionPandaSteering.Common.MotionInterpreter.MaxSpeed = (int)settings.MaxSpeed;
+            if (settings.PeaceArea != null)
+                LeapMotionPandaSteering.Common.MotionInterpreter.PeaceArea = (int)settings.PeaceArea;
+        }
+
         private static Settings InitializeConfiguration(string path)
         {
-            LeapMotionPandaSteering.Common.MotionInterpreter.Initialize();
-            var serializer = new XmlSerializer(typeof(Settings));
-
-            using (var reader = new StreamReader(path))
+            try
             {
-                return (Settings)serializer.Deserialize(reader);
-                
+                LeapMotionPandaSteering.Common.MotionInterpreter.Initialize();
+                var serializer = new XmlSerializer(typeof(Settings));
+
+                using (var reader = new StreamReader(path))
+                {
+                    return (Settings)serializer.Deserialize(reader);
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Could not load configuration. Ensure config.xml content is valid.", e);
+                return null;
             }
         }
     }
@@ -75,6 +103,21 @@ namespace LeapMotionPandaSteering
 
         [XmlElement]
         public int ClientPort { get; set; }
+
+        [XmlElement(IsNullable = true)]
+        public int? Delay { get; set; }
+
+        [XmlElement(IsNullable = true)]
+        public int? MaxSpeed { get; set; }
+
+        [XmlElement(IsNullable = true)]
+        public int? MaxAmplitude { get; set; }
+
+        [XmlElement(IsNullable = true)]
+        public int? PeaceArea { get; set; }
+
+        [XmlElement(IsNullable = true)]
+        public int? CircleSpeed { get; set; }
 
         [XmlElement]
         public int SteeringModeHandsCount { get; set; }

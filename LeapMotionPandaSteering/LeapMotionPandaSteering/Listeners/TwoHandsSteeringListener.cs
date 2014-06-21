@@ -18,9 +18,6 @@ namespace LeapMotionPandaSteering.Listeners
 
         public RoboclawProxy Proxy { get; private set; } 
 
-        public HandAppearDelegate OnOneHandAppear;
-        public HandDisappearDelegate OnHandDisappear;
-
         public TwoHandsSteeringListener(RoboclawProxy proxy)
         {
             Proxy = proxy;
@@ -88,9 +85,6 @@ namespace LeapMotionPandaSteering.Listeners
             else if (frame.Hands.Count == 2 && frame.Hands[0].Fingers.Count > 0 && initialLeftHandPosition != null &&
                      frame.Hands[1].Fingers.Count > 0 && initialRightHandPosition != null)
             {
-//                SafeWriteLine("steering");
-                //if (frame.Id % 9 != 0)
-                //    return;
                 Vector left;
                 Vector right;
                 if (frame.Hands[0].PalmPosition.x < frame.Hands[1].PalmPosition.x)
@@ -121,16 +115,10 @@ namespace LeapMotionPandaSteering.Listeners
             }
             else if (frame.Hands.Count == 0)
             {
-//                SafeWriteLine("reset");
                 initialLeftHandPosition = null;
                 initialRightHandPosition = null;
                 MotionInterpreter.Stop(Proxy);
             }
-            /*else if(frame.Id % 3 == 0)
-            {
-//                SafeWriteLine("stopping");
-                MotionInterpreter.Stop(Proxy);
-            }*/
             previousFrameState.HandsCount = frame.Hands.Count;
         }
         

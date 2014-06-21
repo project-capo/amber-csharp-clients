@@ -8,8 +8,6 @@ using LeapMotionPandaSteering.Common;
 using Amber_API.Amber;
 using Amber_API.Drivers;
 
-public delegate void HandAppearDelegate();
-public delegate void HandDisappearDelegate();
 
 namespace LeapMotionPandaSteering.Listeners
 {
@@ -20,9 +18,6 @@ namespace LeapMotionPandaSteering.Listeners
         private Vector zeroVector;
 
         public RoboclawProxy Proxy { get; private set; } 
-
-        public HandAppearDelegate OnOneHandAppear;
-        public HandDisappearDelegate OnHandDisappear;
 
         public RoboclawListener(RoboclawProxy proxy)
         {
