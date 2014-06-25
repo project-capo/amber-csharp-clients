@@ -10,8 +10,8 @@ namespace AmberDemos.Demos
     {
         public static void Main(string[] args)
         {   
-            //new RoboclawDemo().RunDemo();
-            new NinedofDemo().RunDemo();
+            new RoboclawDemo().RunDemo();
+            //new NinedofDemo().RunDemo();
         }
     }
 }

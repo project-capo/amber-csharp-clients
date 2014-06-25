@@ -54,6 +54,7 @@ namespace LeapMotionPandaSteering.Common
 
             try
             {
+                Console.WriteLine("{0}, {1}, {2}, {3}", fl, fr, rl, rr);
                 proxy.SetSpeed(fl, fr, rl, rr);
                 TimeSinceLastMessage.Restart();
             }
@@ -143,7 +144,7 @@ namespace LeapMotionPandaSteering.Common
             int circleSpeed = MotionInterpreter.CircleSpeed;
             try
             {
-                proxy.SetSpeed(circleSpeed*direction, circleSpeed*direction, -circleSpeed*direction, -circleSpeed*direction);
+                proxy.SetSpeed(circleSpeed*direction, -circleSpeed*direction, circleSpeed*direction, -circleSpeed*direction);
             }
             catch (Exception e)
             {

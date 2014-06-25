@@ -11,8 +11,7 @@ namespace LeapMotionPandaSteering.Listeners
 {
     public class TwoHandsSteeringListener : Listener
     {
-        private Object thisLock = new Object();
-        private FrameState previousFrameState;
+        private Object thisLock = new Object();        
         private Vector initialLeftHandPosition;
         private Vector initialRightHandPosition;
 
@@ -34,8 +33,7 @@ namespace LeapMotionPandaSteering.Listeners
         }
 
         public override void OnInit(Controller controller)
-        {
-            previousFrameState = new FrameState();
+        {            
             SafeWriteLine("Initialized");
         }
 
@@ -67,10 +65,9 @@ namespace LeapMotionPandaSteering.Listeners
         }
 
         private void ControlHandEvents(Frame frame)
-        {
-            if (frame.Hands.Count == 2 && frame.Hands[0].Fingers.Count > 0 && initialLeftHandPosition == null && frame.Hands[1].Fingers.Count > 0 && initialRightHandPosition == null && previousFrameState.HandsCount < 2)
-            {
-                SafeWriteLine("init");
+        {                   
+            if (frame.Hands.Count == 2 && frame.Hands[0].GrabStrength < 1.0 && initialLeftHandPosition == null && frame.Hands[1].GrabStrength < 1.0 && initialRightHandPosition == null)
+            {                
                 if (frame.Hands[0].PalmPosition.x < frame.Hands[1].PalmPosition.x)
                 {
                     initialLeftHandPosition = frame.Hands[0].PalmPosition;
@@ -82,8 +79,8 @@ namespace LeapMotionPandaSteering.Listeners
                     initialLeftHandPosition = frame.Hands[1].PalmPosition;
                 }
             }
-            else if (frame.Hands.Count == 2 && frame.Hands[0].Fingers.Count > 0 && initialLeftHandPosition != null &&
-                     frame.Hands[1].Fingers.Count > 0 && initialRightHandPosition != null)
+            else if (frame.Hands.Count == 2 && frame.Hands[0].GrabStrength < 1.0 && initialLeftHandPosition != null &&
+                     frame.Hands[1].GrabStrength < 1.0 && initialRightHandPosition != null)
             {
                 Vector left;
                 Vector right;
@@ -104,7 +101,7 @@ namespace LeapMotionPandaSteering.Listeners
             else if (frame.Hands.Count == 1 && frame.Gestures()[0].Type == Gesture.GestureType.TYPE_CIRCLE)
             {
                 var circle = new CircleGesture(frame.Gestures()[0]);
-                if (circle.Pointable.Direction.AngleTo(circle.Normal) <= Math.PI/4)
+                if (circle.Pointable.Direction.AngleTo(circle.Normal) <= Math.PI / 4)
                 {
                     MotionInterpreter.Circle(Proxy, 1);
                 }
@@ -113,13 +110,21 @@ namespace LeapMotionPandaSteering.Listeners
                     MotionInterpreter.Circle(Proxy, -1);
                 }
             }
+            else if (frame.Hands.Count == 2 && frame.Hands[0].GrabStrength == 1.0 && initialLeftHandPosition != null &&
+                     frame.Hands[1].GrabStrength == 1.0 && initialRightHandPosition != null)
+            {
+                MotionInterpreter.Stop(Proxy);
+            }
+            else if (frame.Hands.Count == 1 && frame.Hands[0].GrabStrength == 1.0)
+            {
+                MotionInterpreter.Stop(Proxy);
+            }
             else if (frame.Hands.Count == 0)
             {
                 initialLeftHandPosition = null;
                 initialRightHandPosition = null;
                 MotionInterpreter.Stop(Proxy);
-            }
-            previousFrameState.HandsCount = frame.Hands.Count;
+            }            
         }
         
 

@@ -21,9 +21,10 @@ namespace LeapMotionPandaSteering
                 return;
 
             SetMotionInterpreterParameters(settings);
-            AmberClient client = AmberClient.Create(settings.ClientIP, settings.ClientPort);
+            AmberClient client = null;
             try
             {
+                client = AmberClient.Create(settings.ClientIP, settings.ClientPort);
                 var roboclawProxy = new RoboclawProxy(client, 0);
                 var controller = new Controller(); 
                 
@@ -53,7 +54,8 @@ namespace LeapMotionPandaSteering
 
             finally
             {
-                client.Terminate();
+                if(client!=null)
+                    client.Terminate();
             }
            
         }
