@@ -5,3 +5,4 @@ Amber_API/Amber_API/bin/*
 LeapMotionPandaSteering/LeapMotionPandaSteering/bin/*
 LeapMotionPandaSteering/LeapMotionPandaSteering/obj/*
 Amber_API/AmberDemos/bin/*
+*.userprefs
