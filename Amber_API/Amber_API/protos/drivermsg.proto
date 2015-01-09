@@ -12,6 +12,9 @@ enum DeviceType {
     DUMMY = 5;
     LOCATION = 6;
     MAESTRO = 7;
+    DRIVE_TO_POINT = 8;
+    COLLISION_AVOIDANCE = 9;
+    PID_FOLLOW_TRAJECTORY = 10;
 }
 
 message DriverHdr {
@@ -35,5 +38,5 @@ message DriverMsg {
     optional uint32 synNum = 3;
     optional uint32 ackNum = 4;
     optional uint32 listenerNum = 5;
-    extensions 10 to 79;
+    extensions 10 to 199;
 }
