@@ -4,7 +4,7 @@ env:
 language: csharp
 before_script:
   - cd Amber_API
-solution: Amber_API/Amber_API.sln
+solution: Amber_API.sln
 addons:
   coverity_scan:
     project:
