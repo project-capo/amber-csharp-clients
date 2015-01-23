@@ -1,6 +1,10 @@
 amber-csharp-clients
 ====================
 
+[![Build Status](https://travis-ci.org/project-capo/amber-csharp-clients.svg?branch=master)](https://travis-ci.org/project-capo/amber-csharp-clients)
+
+[![Coverity Scan Build Status](https://scan.coverity.com/projects/4015/badge.svg?style=flat)](https://scan.coverity.com/projects/4015)
+
 Requirements
 ------------
 

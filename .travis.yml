@@ -1,0 +1,21 @@
+env:
+  global:
+   - secure: "BwWtSFjXoyl/Pt7CB1AtS5peIRQ+JaoQskw1yUnNFplqauOd4eBY89ry/HsyTPsTsSRz32l3s/Cd2ebTYTzM85jcLIoZ2y+upN6VqJ4Xuv7pvXRE4vFB+jFAkWFYJxLZO5SSUjuSahY2iYoQHl8XQtSoIrpo/OV7K6eSh5jwBZQ="
+language: csharp
+solution: Amber_API/Amber_API.sln
+addons:
+  coverity_scan:
+    project:
+      name: "project-capo/amber-csharp-clients"
+      description: "Build submitted via Travis CI"
+    notification_email: pawel@suder.info
+    build_command_prepend: "msbuild /t:Clean"
+    build_command: "msbuild /t:Rebuild"
+    branch_pattern: coverity_scan
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/a92d0e0a6511230d702b
+    on_success: change  # options: [always|never|change] default: always
+    on_failure: always  # options: [always|never|change] default: always
+    on_start: false     # default: false
