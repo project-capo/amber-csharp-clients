@@ -3,6 +3,9 @@ env:
    - secure: "BwWtSFjXoyl/Pt7CB1AtS5peIRQ+JaoQskw1yUnNFplqauOd4eBY89ry/HsyTPsTsSRz32l3s/Cd2ebTYTzM85jcLIoZ2y+upN6VqJ4Xuv7pvXRE4vFB+jFAkWFYJxLZO5SSUjuSahY2iYoQHl8XQtSoIrpo/OV7K6eSh5jwBZQ="
 language: csharp
 solution: Amber_API/Amber_API.sln
+script:
+  - cd Amber_API
+  - xbuild /p:Configuration=Release Amber_API.sln
 addons:
   coverity_scan:
     project:
